@@ -24,16 +24,12 @@ export const register = async (req,res)=>{
                 email:email
             }
         })
-
-        console.log("1");
-        
+  
         if(existingUser){
             return res.status(400).json({
                 message: "User already exists",
             });
         }
-        console.log("2");
-
 
         const hashedPassword = await bcrypt.hash(password, 12);
 
@@ -46,15 +42,11 @@ export const register = async (req,res)=>{
             }
         })
 
-        console.log("3");
-
         const token = jwt.sign(
             { id: newUser.id },           
             process.env.JWT_KEY,           
             { expiresIn: "7d" }          
           );
-
-        console.log("4");
 
         res.cookie("jwt", token , {
             httpOnly: true,
@@ -62,9 +54,6 @@ export const register = async (req,res)=>{
             secure: process.env.NODE_ENV !== "development",
             maxAge: 1000 * 60 * 60 * 24 * 7
         });
-
-        console.log("5");
-
 
         res.status(201).json({
             message: "User created successfully",
