@@ -67,13 +67,68 @@ export const register = async (req,res)=>{
         })
     } catch (error) {
         return res.status(500).json({
-            error: "Error creating user",
+            error: "An error occurred while creating the user.",
         });
     }
 
 }
 
-export const login = async (req,res)=>{}
+export const login = async (req,res)=>{
+    const {email, password} = req.body;
+
+    if(!email || !password){
+        res.status(401).json({
+            message: "All fields are required."
+        })
+    }
+
+    try {
+        const user = await db.user.findUnique({
+            where:{
+                email:email
+            }
+        })
+    
+        if(!user){
+            req.status(400).json({
+                message: "User does not exist. Please check your email and try again."
+            })
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if(!isMatch){
+            res.status(401).json({
+                message: "Invalid email or password. Please try again."
+            })
+        }
+
+        const token = jwt.sign({id: user.id}, process.env.JWT_KEY, {expiresIn: "7d"});
+
+        res.cookie("jwt", token , {
+            httpOnly: true,
+            sameSite: "strict",
+            secure: process.env.NODE_ENV !== "development",
+            maxAge: 1000 * 60 * 60 * 24 * 7
+        });
+
+        res.status(201).json({
+            message: "User logged in successfully.",
+            user:{
+                id: user.id,
+                email: user.email,
+                name: user.name,
+                role: user.role,
+                image: user.image,
+            }
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            error: "An error occurred while logging in.",
+        });
+    }
+}
 
 export const logout = async (req,res)=>{}
 

@@ -15,9 +15,8 @@ app.use(cookieParser());
 const PORT = process.env.PORT||3000;
 
 app.get("/", (req, res)=>{
-    res.send("Hello Guys Welcome to IntelliLab 🔥");
+    res.send("Hello Bro Welcome to IntelliLab 🔥");
 })
-
 
 app.use('/api/v1/auth', authRoutes)
 app.use('/api/v1/problems', problemRoutes)
