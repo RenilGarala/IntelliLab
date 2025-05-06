@@ -140,7 +140,7 @@ export const logout = async (req,res)=>{
             secure: process.env.NODE_ENV !== "development",
         })
 
-        res.status(204).json({
+        res.status(200).json({
             success: true,
             message: "User logged out successfully."
         })
@@ -152,6 +152,18 @@ export const logout = async (req,res)=>{
 }
 
 export const checkAuth = async (req,res)=>{
+    try {
+        //extract user from middleware and send as a response
+        res.status(200).json({
+            success: true,
+            message: "User Authenticate Successfully",
+            user: req.user,
+        })
+    } catch (error) {
+        res.status(400).json({
+            message: "Unauthorized access. Login required."
+        })
+    }
 }
 
 export const getSubmission = async (req, res)=>{
