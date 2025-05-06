@@ -151,4 +151,11 @@ export const logout = async (req,res)=>{
     }
 }
 
-export const check = async (req,res)=>{}
+export const checkAuth = async (req,res)=>{
+}
+
+export const getSubmission = async (req, res)=>{
+}
+
+export const getUserPlaylists = async (req, res)=>{
+}
