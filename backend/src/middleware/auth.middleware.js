@@ -1,7 +1,7 @@
-import jwt, { decode } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { db } from "../libs/db.js";
 
-export const authMiddleware = async (req, res, next) => {
+export const authenticate = async (req, res, next) => {
   try {
     const token = req.cookies.jwt;
 
@@ -54,3 +54,30 @@ export const authMiddleware = async (req, res, next) => {
     });
   }
 };
+
+export const checkAdmin = async (req, res, next) => {
+    try {
+        const userId = req.user.id;
+
+        const user = await db.user.findUnique({
+            where:{
+                id:user.id
+            },
+            select:{
+                role: true
+            }
+        })
+
+        if(!user || user.role !== 'ADMIN'){
+            res.status(400).json({
+                message: "You do not have permission to access this resource"
+            })
+        }
+
+        next();
+    } catch (error) {
+        res.status(400).json({
+            message: "Error in Checking Admin Role"
+        })
+    }
+}
