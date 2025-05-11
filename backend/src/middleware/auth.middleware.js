@@ -58,17 +58,17 @@ export const authenticate = async (req, res, next) => {
 export const checkAdmin = async (req, res, next) => {
     try {
         const userId = req.user.id;
-
+        
         const user = await db.user.findUnique({
             where:{
-                id:user.id
+                id:userId
             },
             select:{
                 role: true
             }
         })
 
-        if(!user || user.role !== 'ADMIN'){
+        if(!user || user.role !== 'USER'){
             res.status(400).json({
                 message: "You do not have permission to access this resource"
             })

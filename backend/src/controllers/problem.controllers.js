@@ -32,14 +32,13 @@ export const createProblem = async (req, res) => {
       }));
 
       const submissionResults = await submitBatch(submissions);
-
+      
       const tokens = submissionResults.map((res) => res.token);
 
       const results = await pollBatchResults(tokens);
 
       for (let i = 0; i < results.length; i++) {
         const result = results[i];
-        console.log("Result-----", result);
 
         if (result.status.id !== 3) {
           return res.status(400).json({
@@ -48,7 +47,7 @@ export const createProblem = async (req, res) => {
         }
       }
     }
-
+    
     const newProblem = await db.problem.create({
       data: {
         title,
@@ -75,3 +74,13 @@ export const createProblem = async (req, res) => {
     });
   }
 };
+
+export const getAllProblem = async (req, res) => {};
+
+export const getProblemById = async (req, res) => {};
+
+export const updateProblem = async (req, res) => {};
+
+export const deleteProblem = async (req, res) => {};
+
+export const getAllProblemsSolvedByUser = async (req, res) => {};
