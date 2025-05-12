@@ -75,7 +75,27 @@ export const createProblem = async (req, res) => {
   }
 };
 
-export const getAllProblem = async (req, res) => {};
+export const getAllProblem = async (req, res) => {
+  try {
+    const problems = await db.problem.findMany();
+
+    if(!problems){
+      return res.status(400).json({
+        message: "No Problem Available"
+      })
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Problem Fatched Successfully",
+      problems
+    })
+  } catch (error) {
+    return res.status(500).json({
+      error: "Error While Fetching Problem list",
+    });
+  }
+};
 
 export const getProblemById = async (req, res) => {};
 
