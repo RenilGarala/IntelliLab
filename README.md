@@ -22,7 +22,7 @@ docker run --name my-postgres -e POSTGRES_USER=myuser -e POSTGRES_PASSWORD=mypas
 
 # IntelliLab - Problem Solving Platform
 
-![IntelliLab-2](https://github.com/user-attachments/assets/78fcf640-5104-4057-96e4-5cb767e445bb)
+![IntelliLab](https://github.com/user-attachments/assets/c0756659-6a24-4e6d-ad7e-374b68abc2c3)
 
 
 
