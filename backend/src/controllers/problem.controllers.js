@@ -168,12 +168,14 @@ export const updateProblem = async (req, res) => {
       });
     }
 
-    if (req.user.role !== "ADMIN") {
+    if (req.user.role !== "USER") {
       return res.status(403).json({ 
-        error: "Forbidden: Only admin can update problems" 
+        error: "Sorry: Only admin can update problems" 
       });
     }
 
+    console.log("1");
+    
     for (const [language, solutionCode] of Object.entries(referenceSolutions)) {
       const languageId = getJudge0LanguageId(language);
 
@@ -182,6 +184,8 @@ export const updateProblem = async (req, res) => {
           error: `Language ${language} is not supported` 
         });
       }
+
+    console.log("2");
 
       const submissions = testCases.map(({ input, output }) => ({
         source_code: solutionCode,
@@ -193,6 +197,7 @@ export const updateProblem = async (req, res) => {
       const submissionResults = await submitBatch(submissions);
 
       const tokens = submissionResults.map((res) => res.token);
+      console.log("3");
 
       const results = await pollBatchResults(tokens);
 
@@ -206,29 +211,44 @@ export const updateProblem = async (req, res) => {
         }
       }
     }
+    console.log("4");
+    console.log(id);
+    
 
-    const updatedProblem = await db.problem.update({
-      where: { 
-        id 
-      },
-      data: {
-        title,
-        description,
-        difficulty,
-        tags,
-        examples,
-        constraints,
-        testCases,
-        codeSnippets,
-        referenceSolutions,
-      },
-    });
+    try {
+      const updatedProblem = await db.problem.update({
+        where: { 
+          id 
+        },
+        data: {
+          title,
+          description,
+          difficulty,
+          tags,
+          examples,
+          constraints,
+          testCases,
+          codeSnippets,
+          referenceSolutions,
+        },
+      });
 
-    res.status(200).json({
-      success: true,
-      message: "Problem updated successfully",
-      problem: updatedProblem,
-    });
+      console.log(updatedProblem);
+
+      res.status(200).json({
+        success: true,
+        message: "Problem updated successfully",
+        problem: updatedProblem,
+      });
+      
+    } catch (error) {
+      return res.status(400).json({
+        message: "Error in update problem"
+      });
+    }
+
+
+    
   } catch (error) {
     return res.status(500).json({
       error: "Error While Updating Problem",
@@ -237,6 +257,38 @@ export const updateProblem = async (req, res) => {
   
 };
 
-export const deleteProblem = async (req, res) => {};
+export const deleteProblem = async (req, res) => {
+  const {id} = req.params;
+
+  if(!id){
+    return res.status(400).json({
+      message: "Problem id not detected!"
+    })
+  }
+
+  try {
+    const problem = await db.problem.delete({
+      where:{
+        id
+      }
+    });
+
+    if(!problem){
+      return res.status(400).json({
+        message: "Problem not Found"
+      })
+    }
+
+    return res.status(200).json({
+      message: "Problem Delete Successfully",
+      problem
+    })
+  }
+   catch (error) {
+    return res.status(400).json({
+      message: "Error Problem not Delete",
+    })
+  }
+};
 
 export const getAllProblemsSolvedByUser = async (req, res) => {};
