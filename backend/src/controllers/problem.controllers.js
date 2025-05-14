@@ -149,18 +149,17 @@ export const updateProblem = async (req, res) => {
     tags,
     examples,
     constraints,
-    testCases,
+    testcases,
     codeSnippets,
     referenceSolutions,
   } = req.body;
-
+  
   try {
     const problem = await db.problem.findUnique({ 
-        where: { 
-          id 
-        } 
-      }
-    );
+      where: { 
+        id 
+      } 
+    });
 
     if (!problem) {
       return res.status(404).json({ 
@@ -173,8 +172,6 @@ export const updateProblem = async (req, res) => {
         error: "Sorry: Only admin can update problems" 
       });
     }
-
-    console.log("1");
     
     for (const [language, solutionCode] of Object.entries(referenceSolutions)) {
       const languageId = getJudge0LanguageId(language);
@@ -185,19 +182,16 @@ export const updateProblem = async (req, res) => {
         });
       }
 
-    console.log("2");
-
-      const submissions = testCases.map(({ input, output }) => ({
+      const submissions = testcases.map(({ input, output }) => ({
         source_code: solutionCode,
         language_id: languageId,
         stdin: input,
         expected_output: output,
       }));
-
+      
       const submissionResults = await submitBatch(submissions);
 
       const tokens = submissionResults.map((res) => res.token);
-      console.log("3");
 
       const results = await pollBatchResults(tokens);
 
@@ -211,50 +205,35 @@ export const updateProblem = async (req, res) => {
         }
       }
     }
-    console.log("4");
-    console.log(id);
-    
 
-    try {
-      const updatedProblem = await db.problem.update({
-        where: { 
-          id 
-        },
-        data: {
-          title,
-          description,
-          difficulty,
-          tags,
-          examples,
-          constraints,
-          testCases,
-          codeSnippets,
-          referenceSolutions,
-        },
-      });
+    const updatedProblem = await db.problem.update({
+      where: { 
+        id 
+      },
+      data: {
+        title,
+        description,
+        difficulty,
+        tags,
+        examples,
+        constraints,
+        testcases,
+        codeSnippets,
+        referenceSolutions,
+      },
+    });
 
-      console.log(updatedProblem);
-
-      res.status(200).json({
-        success: true,
-        message: "Problem updated successfully",
-        problem: updatedProblem,
-      });
-      
-    } catch (error) {
-      return res.status(400).json({
-        message: "Error in update problem"
-      });
-    }
-
-
+    res.status(200).json({
+      success: true,
+      message: "Problem updated successfully",
+      problem: updatedProblem,
+    });
     
   } catch (error) {
     return res.status(500).json({
       error: "Error While Updating Problem",
     });
   }
-  
 };
 
 export const deleteProblem = async (req, res) => {
