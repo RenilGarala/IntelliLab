@@ -68,7 +68,7 @@ export const checkAdmin = async (req, res, next) => {
             }
         })
 
-        if(!user || user.role !== 'USER'){
+        if(!user || user.role !== 'ADMIN'){
             res.status(400).json({
                 message: "You do not have permission to access this resource"
             })
