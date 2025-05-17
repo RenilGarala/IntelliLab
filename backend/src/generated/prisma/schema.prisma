@@ -91,7 +91,7 @@ model TestCaseResult {
   id            String  @id @default(uuid())
   submissionId  String
   testCase      Int
-  passes        Boolean
+  passed        Boolean
   stdout        String?
   expected      String
   stderr        String?

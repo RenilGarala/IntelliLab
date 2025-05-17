@@ -89,13 +89,12 @@ export const executeCode = async (req, res) => {
           : null,
       },
     });
-    console.log("Submission Saved:", submission);
 
     //if all test case is passed then mark that problem as a done
     if (allPassed) {
       await db.problemSolved.upsert({
         where: {
-          userID_problemId: {
+          userId_problemId: {
             userId,
             problemId,
           },
@@ -107,25 +106,30 @@ export const executeCode = async (req, res) => {
         },
       });
     }
-    console.log("232");
 
     // now save individual test case results
-    const testCaseResults = detailedResults.map((result) => ({
+    const testCaseResult = detailedResults.map((result) => ({
       submissionId: submission.id,
       testCase: result.testCase,
       passed: result.passed,
       stdout: result.stdout,
       expected: result.expected,
-      stderr: result.stderr,
-      compileOutput: result.compile_output,
+      stderr: result.stderr ?? null,
+      compileOutput: result.compile_output ?? null,
       status: result.status,
-      memory: result.memory,
-      time: result.time,
+      memory: result.memory ?? null,
+      time: result.time ?? null,
     }));
 
-    await db.testCaseResult.createMany({
-      data: testCaseResults,
-    });
+    try {
+      await db.testCaseResult.createMany({
+        data: testCaseResult,
+      });
+    } catch (err) {
+      return res.status(500).json({
+        error: "Failed to update record in database",
+      });
+    }
 
     const submissionWithTestCases = await db.submission.findUnique({
       where: {
@@ -135,7 +139,6 @@ export const executeCode = async (req, res) => {
         testCases: true,
       },
     });
-    console.log(submissionWithTestCases);
 
     res.status(200).json({
       success: true,

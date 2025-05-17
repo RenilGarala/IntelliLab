@@ -23,7 +23,7 @@ CREATE TABLE "TestCaseResult" (
     "id" TEXT NOT NULL,
     "submissionId" TEXT NOT NULL,
     "testCase" INTEGER NOT NULL,
-    "passes" BOOLEAN NOT NULL,
+    "passed" BOOLEAN NOT NULL,
     "stdout" TEXT,
     "expected" TEXT NOT NULL,
     "stderr" TEXT,
