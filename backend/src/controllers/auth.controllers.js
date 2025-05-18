@@ -178,10 +178,16 @@ export const getSubmissions = async (req, res) => {
       submissions,
     });
   } catch (error) {
-    return res.status(500).json({ 
-        error: "Failed to fetch submissions" 
+    return res.status(500).json({
+      error: "Failed to fetch submissions",
     });
   }
 };
 
-export const getUserPlaylists = async (req, res) => {};
+export const getUserPlaylists = async (req, res) => {
+  try {
+    
+  } catch (error) {
+    
+  }
+};
