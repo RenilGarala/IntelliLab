@@ -55,45 +55,90 @@ export const createPlaylist = async (req, res) => {
 };
 
 export const getAllListDetail = async (req, res) => {
-    try {
-        const userID = req.user.id;
+  try {
+    const userId = req.user.id;
 
-        if(!userID){
-            return res.status(400).json({
-                success: false,
-                message: "User ID not found.",
-            })
-        }
-
-        const playlists = await db.playlist.findMany({
-            where:{
-                userId: req.user.id
-            },
-            include:{
-                problems:{
-                    include:{
-                        problem: true
-                    }
-                }
-            }
-        });
-
-        res.status(200).json({
-            success: true,
-            message: "Playlists fetched successfully.",
-            playlists
-        })
-    } catch (error) {
-        return res.status(500).json({
-            success: false,
-            message: "Failed to fetch playlists.",
-        })
+    if (!userId) {
+      return res.status(400).json({
+        success: false,
+        message: "User ID not found.",
+      });
     }
+
+    const playlists = await db.playlist.findMany({
+      where: {
+        userId: req.user.id,
+      },
+      include: {
+        problems: {
+          include: {
+            problem: true,
+          },
+        },
+      },
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Playlists fetched successfully.",
+      playlists,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch playlists.",
+    });
+  }
 };
 
-export const getPlaylistDetails = async (req, res) => {};
+export const getPlaylistDetails = async (req, res) => {
+  try {
+    const { playlistId } = req.params;
+    const userId = req.user.id;
 
-export const addProblemToPlaylist = async (req, res) => {};
+    if (!playlistId || !userId) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing required parameters: playlistId or userId.",
+      });
+    }
+
+    const playlist = await db.playlist.findUnique({
+      where: {
+        id: playlistId,
+        userId: userId,
+      },
+      include: {
+        problems: {
+          include: {
+            problem: true,
+          },
+        },
+      },
+    });
+
+    if (!playlist) {
+      return res.status(400).json({
+        success: false,
+        message: "Playlist not found.",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Playlist fetched successfully.",
+      playlist,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: "An error occurred while fetching the playlist.",
+    });
+  }
+};
+
+export const addProblemToPlaylist = async (req, res) => {
+};
 
 export const deletePlaylist = async (req, res) => {};
 
