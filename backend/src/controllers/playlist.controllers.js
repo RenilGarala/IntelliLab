@@ -54,7 +54,42 @@ export const createPlaylist = async (req, res) => {
   }
 };
 
-export const getAllListDetail = async (req, res) => {};
+export const getAllListDetail = async (req, res) => {
+    try {
+        const userID = req.user.id;
+
+        if(!userID){
+            return res.status(400).json({
+                success: false,
+                message: "User ID not found.",
+            })
+        }
+
+        const playlists = await db.playlist.findMany({
+            where:{
+                userId: req.user.id
+            },
+            include:{
+                problems:{
+                    include:{
+                        problem: true
+                    }
+                }
+            }
+        });
+
+        res.status(200).json({
+            success: true,
+            message: "Playlists fetched successfully.",
+            playlists
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Failed to fetch playlists.",
+        })
+    }
+};
 
 export const getPlaylistDetails = async (req, res) => {};
 
