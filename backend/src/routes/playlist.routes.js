@@ -10,7 +10,7 @@ playlistRoutes.get('/:playlistId', authenticate, getPlaylistDetails);
 
 playlistRoutes.post('/create-playlist', authenticate, createPlaylist);
 
-playlistRoutes.post('/:plalistId/add-problem', authenticate, addProblemToPlaylist);
+playlistRoutes.post('/:playlistId/add-problem', authenticate, addProblemToPlaylist);
 
 playlistRoutes.delete('/:plalistId', authenticate, deletePlaylist);
 

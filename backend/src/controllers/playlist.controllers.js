@@ -138,6 +138,43 @@ export const getPlaylistDetails = async (req, res) => {
 };
 
 export const addProblemToPlaylist = async (req, res) => {
+  try {
+    const { playlistId } = req.params;
+    const { problemIds } = req.body;
+    const userId = req.user.id;
+    
+    if (!userId || !playlistId) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing required parameters: playlistId or userId.",
+      });
+    }
+
+    if (!Array.isArray(problemIds) || problemIds.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid or missing problemIds. Provide a non-empty array.",
+      });
+    }
+
+    const problemInPlaylist = await db.problemInPlaylist.createMany({
+      data: problemIds.map((problemId) => ({
+        playlistId,
+        problemId,
+      })),
+    });
+
+    return res.status(201).json({
+      success: true,
+      message: "Problems added to playlist successfully.",
+      problemInPlaylist,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: "An internal server error occurred while adding problems to the playlist.",
+    });
+  }
 };
 
 export const deletePlaylist = async (req, res) => {};
