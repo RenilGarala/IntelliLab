@@ -142,7 +142,7 @@ export const addProblemToPlaylist = async (req, res) => {
     const { playlistId } = req.params;
     const { problemIds } = req.body;
     const userId = req.user.id;
-    
+
     if (!userId || !playlistId) {
       return res.status(400).json({
         success: false,
@@ -172,11 +172,57 @@ export const addProblemToPlaylist = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       success: false,
-      error: "An internal server error occurred while adding problems to the playlist.",
+      error:
+        "An internal server error occurred while adding problems to the playlist.",
     });
   }
 };
 
 export const deletePlaylist = async (req, res) => {};
 
-export const removeProblemFromPlaylist = async (req, res) => {};
+export const removeProblemFromPlaylist = async (req, res) => {
+  try {
+    const { playlistId } = req.params;
+    const { problemIds } = req.body;
+    const userId = req.user.id;
+
+    console.log(playlistId);
+    console.log(problemIds);
+    console.log(userId);
+    
+    if (!userId || !playlistId) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing required parameters: playlistId or userId.",
+      });
+    }
+
+    if (!Array.isArray(problemIds) || problemIds.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid or missing problemIds. Provide a non-empty array.",
+      });
+    }
+
+    const deleteProblem = await db.problemInPlaylist.deleteMany({
+        where:{
+            playlistId,
+            problemId:{
+                in:problemIds
+            }
+        }
+    })
+
+    return res.status(200).json({
+        success: true,
+        message: "Delete problem from playlist successfully.",
+        deleteProblem,
+      });
+  } catch (error) {
+    return res.status(500).json({
+        success: false,
+        error:
+          "An internal server error occurred while deleting problems from the playlist.",
+      });
+  }
+};

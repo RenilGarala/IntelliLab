@@ -12,8 +12,8 @@ playlistRoutes.post('/create-playlist', authenticate, createPlaylist);
 
 playlistRoutes.post('/:playlistId/add-problem', authenticate, addProblemToPlaylist);
 
-playlistRoutes.delete('/:plalistId', authenticate, deletePlaylist);
+playlistRoutes.delete('/:playlistId', authenticate, deletePlaylist);
 
-playlistRoutes.delete('/:plalistId/remove-problem', authenticate, removeProblemFromPlaylist);
+playlistRoutes.delete('/:playlistId/remove-problem', authenticate, removeProblemFromPlaylist);
 
 export default playlistRoutes;
