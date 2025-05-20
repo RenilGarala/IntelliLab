@@ -178,7 +178,26 @@ export const addProblemToPlaylist = async (req, res) => {
   }
 };
 
-export const deletePlaylist = async (req, res) => {};
+export const deletePlaylist = async (req, res) => {
+  const { playlistId } = req.params;
+
+  try {
+    const deletedPlaylist = await db.playlist.delete({
+      where: {
+        id: playlistId,
+      },
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Playlist deleted successfully",
+      deletedPlaylist,
+    });
+  } catch (error) {
+    console.error("Error deleting playlist:", error.message);
+    res.status(500).json({ error: "Failed to delete playlist" });
+  }
+};
 
 export const removeProblemFromPlaylist = async (req, res) => {
   try {
@@ -186,10 +205,6 @@ export const removeProblemFromPlaylist = async (req, res) => {
     const { problemIds } = req.body;
     const userId = req.user.id;
 
-    console.log(playlistId);
-    console.log(problemIds);
-    console.log(userId);
-    
     if (!userId || !playlistId) {
       return res.status(400).json({
         success: false,
@@ -204,25 +219,25 @@ export const removeProblemFromPlaylist = async (req, res) => {
       });
     }
 
-    const deleteProblem = await db.problemInPlaylist.deleteMany({
-        where:{
-            playlistId,
-            problemId:{
-                in:problemIds
-            }
-        }
-    })
+    const deletedProblem = await db.problemInPlaylist.deleteMany({
+      where: {
+        playlistId,
+        problemId: {
+          in: problemIds,
+        },
+      },
+    });
 
-    return res.status(200).json({
-        success: true,
-        message: "Delete problem from playlist successfully.",
-        deleteProblem,
-      });
+    res.status(200).json({
+      success: true,
+      message: "Problem removed from playlist successfully",
+      deletedProblem,
+    });
   } catch (error) {
     return res.status(500).json({
-        success: false,
-        error:
-          "An internal server error occurred while deleting problems from the playlist.",
-      });
+      success: false,
+      error:
+        "An internal server error occurred while deleting problems from the playlist.",
+    });
   }
 };
