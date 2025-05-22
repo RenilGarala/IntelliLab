@@ -5,18 +5,17 @@ import { Link } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import { z } from "zod";
 import myImage from "../assets/Logo3.png";
-import { useAuthStore } from "../store/useAuthStore";
 
 const SignUpSchema = z.object({
   email: z.string().email("Enter a Valid Email").trim(),
 
   password: z
     .string()
-    .min(6, "Password must be at least 6 characters long")
-    .max(100, "Password must not exceed 100 characters")
+    .min(6, "Password must be 6 characters long")
+    .max(100, "Password must not exceed 100 char")
     .regex(
       /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]/,
-      "Password must include at least one letter and one number"
+      "Weak! Add letters and digits"
     )
     .trim(),
 
@@ -24,13 +23,12 @@ const SignUpSchema = z.object({
     .string()
     .min(2, "Name must be at least 2 characters")
     .max(50, "Name must not exceed 50 characters")
-    .regex(/^[a-zA-Z\s]+$/, "Name can only contain letters and spaces")
+    .regex(/^[a-zA-Z\s]+$/, "Name can only contain characters")
     .trim(),
 });
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const {signup , isSigninUp} = useAuthStore();
 
   const {
     register,
@@ -42,7 +40,6 @@ const SignUpPage = () => {
 
   const onSubmit = async (data) => {
     try {
-      await signup(data);
       console.log("SignUp Data:", data);
     } catch (error) {
       console.error("SignUp failed:", error);
@@ -72,7 +69,7 @@ const SignUpPage = () => {
                 <input
                   type="text"
                   {...register("name")}
-                  className={`input input-bordered w-full ${
+                  className={`input input-bordered w-80 ${
                     errors.name ? "input-error" : ""
                   }`}
                   placeholder="John Doe"
@@ -93,7 +90,7 @@ const SignUpPage = () => {
                 <input
                   type="email"
                   {...register("email")}
-                  className={`input input-bordered w-full ${
+                  className={`input input-bordered w-80 ${
                     errors.email ? "input-error" : ""
                   }`}
                   placeholder="you@example.com"
@@ -114,7 +111,7 @@ const SignUpPage = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   {...register("password")}
-                  className={`input input-bordered w-full ${
+                  className={`input input-bordered w-80 ${
                     errors.password ? "input-error" : ""
                   }`}
                   placeholder="••••••••"
@@ -159,7 +156,7 @@ const SignUpPage = () => {
             <p className="text-base-content/60">
               Already have an account?{" "}
               <Link to="/login" className="link link-primary">
-                Sign in
+                Login
               </Link>
             </p>
           </div>
