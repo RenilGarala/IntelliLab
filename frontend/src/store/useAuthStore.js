@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
 
-export const useAuthStore = create((set) => ({
+export const useAuthStore = create((set, get) => ({
   authUser: null,
   isSigninUp: false,
   isLoggingIn: false,
@@ -12,13 +12,10 @@ export const useAuthStore = create((set) => ({
     set({ isCheckingAuth: true });
     try {
       const res = await axiosInstance.get("/auth/check");
-      console.log("Check Auth Response = ", res.data);
       set({ authUser: res.data.user });
-      toast.success(res.data.message);
     } 
     catch (error) {
       set({ authUser: null });
-      toast.error("Error checking auth");
     } 
     finally {
       set({ isCheckingAuth: false });
@@ -44,16 +41,11 @@ export const useAuthStore = create((set) => ({
   login: async (data) => {
     set({ isLoggingIn: true });
     try {
-        console.log("checking");
-        
       const res = await axiosInstance.post("/auth/login", data);
-      console.log(res);
-      
       set({ authUser: res.data.user });
       toast.success(res.data.message);
     } 
     catch (error) {
-      console.log("Error logging in", error);
       toast.error("Error logging in");
     } 
     finally {
