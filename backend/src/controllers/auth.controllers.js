@@ -2,19 +2,17 @@ import bcrypt from "bcryptjs";
 import { db } from "../libs/db.js";
 import { UserRole } from "../generated/prisma/index.js";
 import jwt from "jsonwebtoken";
+import { LoginUserSchema, registerUserSchema } from "../validators/auth.validator.js";
 
 export const register = async (req, res) => {
   const { email, password, name } = req.body;
 
-  if (!name || !email || !password) {
-    return res.status(400).json({
-      message: "All field is required",
-    });
-  }
+  const data = registerUserSchema.safeParse(req.body);
 
-  if (password.length < 6) {
+  if (!data.success) {
     return res.status(400).json({
-      message: "Password must be in 6 letter",
+      message: "Validation failed",
+      errors: data.error.errors[0].message,
     });
   }
 
@@ -74,9 +72,12 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
-  if (!email || !password) {
-    res.status(401).json({
-      message: "All fields are required.",
+  const data = LoginUserSchema.safeParse(req.body);
+
+  if (!data.success) {
+    return res.status(400).json({
+      message: "Validation failed",
+      errors: data.error.errors[0].message,
     });
   }
 

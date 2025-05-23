@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { z } from "zod";
 import myImage from "../assets/Logo3.png";
-import { useAuthStore } from '../store/useAuthStore'
+import { useAuthStore } from "../store/useAuthStore";
 
 const SignUpSchema = z.object({
-  email: z.string().email("Enter a Valid Email").trim(),
+  email: z.string().trim().email("Enter a Valid Email"),
 
   password: z
     .string()
@@ -22,15 +22,18 @@ const SignUpSchema = z.object({
 
   name: z
     .string()
-    .min(2, "Name must be at least 2 characters")
-    .max(50, "Name must not exceed 50 characters")
-    .regex(/^[a-zA-Z\s]+$/, "Name can only contain characters")
-    .trim(),
+    .trim()
+    .min(6, "Password must be at least 6 characters")
+    .max(100, "Password is too long")
+    .refine((val) => /[A-Z]/.test(val), "Include at least one uppercase letter")
+    .refine((val) => /[a-z]/.test(val), "Include at least one lowercase letter")
+    .refine((val) => /[0-9]/.test(val), "Include at least one number")
+    .refine((val) => /[^a-zA-Z0-9]/.test(val), "Include at least one special character"),
 });
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const {signup, isSigninUp} = useAuthStore();
+  const { signup, isSigninUp } = useAuthStore();
 
   const {
     register,
@@ -141,7 +144,7 @@ const SignUpPage = () => {
             <button
               type="submit"
               className="btn btn-primary w-full"
-                disabled={isSigninUp}
+              disabled={isSigninUp}
             >
               {isSigninUp ? (
                 <>
