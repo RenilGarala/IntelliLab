@@ -187,8 +187,26 @@ export const getSubmissions = async (req, res) => {
 
 export const getUserPlaylists = async (req, res) => {
   try {
-    
+    const playLists = await db.playlist.findMany({
+      where: {
+        userId: req.user.id,
+      },
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        createdAt: true,
+      },
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Playlists fetched successfully",
+      playLists,
+    });
   } catch (error) {
-    
+    res.status(500).json({ 
+      error: "Failed to fetch playlists" 
+    });
   }
 };
