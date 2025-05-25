@@ -27,8 +27,6 @@ const SignUpSchema = z.object({
     .max(100, "Password is too long")
     .refine((val) => /[A-Z]/.test(val), "Include at least one uppercase letter")
     .refine((val) => /[a-z]/.test(val), "Include at least one lowercase letter")
-    .refine((val) => /[0-9]/.test(val), "Include at least one number")
-    .refine((val) => /[^a-zA-Z0-9]/.test(val), "Include at least one special character"),
 });
 
 const SignUpPage = () => {
