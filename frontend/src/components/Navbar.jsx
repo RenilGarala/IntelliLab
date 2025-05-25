@@ -15,7 +15,7 @@ import LogoutButton from "./LogoutButton";
 import LoginButton from "./LoginButton";
 
 const Navbar = () => {
-  const { authUser, isLoggingIn } = useAuthStore();
+  const { authUser , isLoggingIn} = useAuthStore();
 
   return (
     <nav className="sticky top-0 z-50 w-full py-5 ">
@@ -109,7 +109,7 @@ const Navbar = () => {
                   </Link>
                 </li>
               )}
-              {isLoggingIn === false ? (
+              {authUser === false || isLoggingIn === false? (
                 <li>
                   <LoginButton className="hover:bg-primary hover:text-white">
                     <LogIn className="w-4 h-4 mr-2" />
