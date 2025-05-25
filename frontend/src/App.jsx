@@ -30,12 +30,11 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Layout/>}>
           <Route index element={<HomePage/>}/>
-        
+        </Route>
         <Route path='/login' element={!authUser ? <LoginPage/> : <Navigate to={"/"}/>}/>
         <Route path='/signup' element={!authUser ? <SignUpPage/>: <Navigate to={"/"}/>}/>
         <Route element={<AdminRoute/>}>
           <Route path='/add-problem' element={ authUser ? <AddProblem/> : <Navigate to={"/"}/>}  />
-        </Route>
         </Route>
       </Routes>
     </div>

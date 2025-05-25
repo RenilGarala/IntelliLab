@@ -15,12 +15,11 @@ import LogoutButton from "./LogoutButton";
 import LoginButton from "./LoginButton";
 
 const Navbar = () => {
-  const { authUser , isLoggingIn} = useAuthStore();
+  const { authUser, isLoggingIn } = useAuthStore();
 
   return (
     <nav className="sticky top-0 z-50 w-full py-5 ">
       <div className="flex w-full justify-between items-center mx-auto max-w-4xl bg-black/15 shadow-lg shadow-neutral-600/5 backdrop-blur-lg border border-gray-200/10 p-4 rounded-2xl">
-        {/* Logo Section */}
         <Link to="/" className="flex items-center gap-3 cursor-pointer">
           <img
             src={logo}
@@ -44,7 +43,7 @@ const Navbar = () => {
             </li>
             <li>
               <Link
-                to="/"
+                to="/problem"
                 className="flex justify-center items-center gap-1 px-4 py-2 rounded-2xl hover:bg-primary/20 hover:text-white text-base font-semibold"
               >
                 <CodeIcon className="w-5 h-5 mr-2" />
@@ -53,7 +52,7 @@ const Navbar = () => {
             </li>
             <li>
               <Link
-                to="/"
+                to="/playlist"
                 className="flex justify-center items-center gap-1 px-4 py-2 rounded-2xl hover:bg-primary/20 hover:text-white text-base font-semibold"
               >
                 <BookOpen className="w-5 h-5 mr-2" />
@@ -63,7 +62,6 @@ const Navbar = () => {
           </ul>
         </div>
 
-        {/* User Profile and Dropdown */}
         <div className="flex items-center gap-8">
           <div className="dropdown dropdown-end">
             <label
@@ -109,7 +107,7 @@ const Navbar = () => {
                   </Link>
                 </li>
               )}
-              {authUser === false || isLoggingIn === false? (
+              {authUser === false || isLoggingIn === false ? (
                 <li>
                   <LoginButton className="hover:bg-primary hover:text-white">
                     <LogIn className="w-4 h-4 mr-2" />
