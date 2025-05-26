@@ -153,7 +153,7 @@ const ProblemsTable = ({ problems }) => {
                         {(problem.tags || []).map((tag, idx) => (
                           <span
                             key={idx}
-                            className="badge badge-outline badge-warning text-xs text-base"
+                            className="badge badge-outline badge-warning text-xs cursor-default"
                           >
                             {tag}
                           </span>
@@ -162,7 +162,7 @@ const ProblemsTable = ({ problems }) => {
                     </td>
                     <td>
                       <span
-                        className={`badge font-semibold text-xs bg-green-700 border-none text-white ${
+                        className={`badge font-semibold text-xs bg-green-700 border-none text-white cursor-default ${
                           problem.difficulty === "EASY"
                             ? "badge-success"
                             : problem.difficulty === "MEDIUM"
