@@ -43,7 +43,7 @@ const Navbar = () => {
             </li>
             <li>
               <Link
-                to="/problem"
+                to="/problems"
                 className="flex justify-center items-center gap-1 px-4 py-2 rounded-2xl hover:bg-primary/20 hover:text-white text-base font-semibold"
               >
                 <CodeIcon className="w-5 h-5 mr-2" />
