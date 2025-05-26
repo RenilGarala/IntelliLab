@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useProblemStore } from "../store/useProblemStore";
 import ProblemsTable from "../components/ProblemsTable";
+import { Loader } from "lucide-react";
 
 const ProblemsPage = () => {
   const { getAllProblems, problems, isProblemsLoading } = useProblemStore();
@@ -16,6 +17,8 @@ const ProblemsPage = () => {
       </div>
     );
   }
+  console.log(problems);
+  
 
   return (
     <div className="min-h-screen">
