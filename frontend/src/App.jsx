@@ -33,8 +33,8 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Layout/>}>
           <Route index element={<HomePage/>}/>
-          <Route path='/problems' element={authUser ? <ProblemsPage/>: <Navigate to={"/"}/>}/>
-          <Route path='/playlist' element={authUser ? <PlaylistPage/>: <Navigate to={"/"}/>}/>
+          <Route path='/problems' element={<ProblemsPage/>}/>
+          <Route path='/playlist' element={<PlaylistPage/>}/>
         </Route>
         <Route path='/login' element={!authUser ? <LoginPage/> : <Navigate to={"/"}/>}/>
         <Route path="/problem/:id" element={authUser ? <ProblemPage /> : <Navigate to="/login" />}/>

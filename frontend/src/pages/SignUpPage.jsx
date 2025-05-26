@@ -23,10 +23,8 @@ const SignUpSchema = z.object({
   name: z
     .string()
     .trim()
-    .min(6, "Password must be at least 6 characters")
-    .max(100, "Password is too long")
-    .refine((val) => /[A-Z]/.test(val), "Include at least one uppercase letter")
-    .refine((val) => /[a-z]/.test(val), "Include at least one lowercase letter")
+    .min(2, "Name must have 2 char")
+    .max(100, "Name is too long")
 });
 
 const SignUpPage = () => {

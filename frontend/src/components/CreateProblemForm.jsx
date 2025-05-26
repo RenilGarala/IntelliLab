@@ -572,9 +572,11 @@ const CreateProblemForm = () => {
   });
 
   const onSubmit = async (value) => {
+    console.log(value);
     try {
       setIsLoading(true);
       const res = await axiosInstance.post("/problems/create-problem", value);
+      console.log(res);
       toast.success(res.data.message || "Problem Created Successfully");
       navigation("/");
     } catch (error) {
@@ -586,14 +588,11 @@ const CreateProblemForm = () => {
 
   const loadSampleData = () => {
     const sampleData = sampleType === "DP" ? sampledpData : sampleStringProblem;
-
     replaceTags(sampleData.tags.map((tag) => tag));
-    replacetestcases(sampleData.testcases.map((tc) => tc));
+    replaceTestCases(sampleData.testcases.map((tc) => tc));
 
     reset(sampleData);
   };
-
- 
 
   return (
     <div className="container mx-auto py-8 px-4 max-w-7xl">
