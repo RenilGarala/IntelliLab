@@ -21,23 +21,26 @@ import {
 import { useProblemStore } from "../store/useProblemStore";
 import { getLanguageId } from "../lib/lang";
 import { useExecutionStore } from "../store/useExecutionStore";
-import SubmissionResults from "../components/Submission";
+import { useSubmissionStore } from "../store/useSubmissionStore";
+import Submission from "../components/Submission";
+import SubmissionsList from "../components/SubmissionList";
 
 const ProblemPage = () => {
   const { id } = useParams();
   const { getProblemById, problem, isProblemLoading } = useProblemStore();
+  const { submission:submissions, isLoading: isSubmissionsLoading, getSubmissionForProblem , getSubmissionCountForProblem , submissionCount } = useSubmissionStore();
+
   const [code, setCode] = useState("");
   const [activeTab, setActiveTab] = useState("description");
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [testCases, setTestCases] = useState([]);
 
-  const submissionCount = 10;
-
   const { executeCode, submission, isExecuting } = useExecutionStore();
 
   useEffect(() => {
     getProblemById(id);
+    getSubmissionCountForProblem(id);
   }, [id]);
 
   useEffect(() => {
@@ -51,6 +54,15 @@ const ProblemPage = () => {
       );
     }
   }, [problem, selectedLanguage]);
+
+  useEffect(() => {
+    if (activeTab === "submissions" && id) {
+      getSubmissionForProblem(id);
+    }
+  }, [activeTab, id]);
+
+  console.log("submission", submissions);
+  
 
   const handleLanguageChange = (e) => {
     const lang = e.target.value;
@@ -120,9 +132,7 @@ const ProblemPage = () => {
         );
       case "submissions":
         return (
-          <div className="p-4 text-center text-base-content/70">
-            No Submission yet
-          </div>
+          <SubmissionsList submissions={submissions} isLoading={isSubmissionsLoading} />
         );
       case "discussion":
         return (
@@ -162,6 +172,17 @@ const ProblemPage = () => {
       console.log("Error executing code", error);
     }
   };
+
+  if (isProblemLoading || !problem) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-base-200">
+        <div className="card bg-base-100 p-8 shadow-xl">
+          <span className="loading loading-spinner loading-lg text-primary"></span>
+          <p className="mt-4 text-base-content/70">Loading problem...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-base-300 to-base-200">
@@ -295,14 +316,16 @@ const ProblemPage = () => {
 
               <div className="p-4 border-t border-base-300 bg-base-200">
                 <div className="flex justify-between items-center">
-                  <button 
-                    className={`btn bg-sky-600 h-10 gap-2 ${isExecuting ? 'loading' : ''}`}
+                  <button
+                    className={`btn bg-sky-600 h-10 gap-2 ${
+                      isExecuting ? "loading" : ""
+                    }`}
                     onClick={handleRunCode}
                     disabled={isExecuting}
                   >
                     {!isExecuting && <Play className="w-4 h-4" />}
                     Run Code
-                  </button> 
+                  </button>
                   <button className="btn bg-emerald-600 h-10 gap-2">
                     Submit
                   </button>
@@ -315,9 +338,9 @@ const ProblemPage = () => {
         <div className="card bg-base-100 shadow-xl mt-6">
           <div className="card-body">
             {submission ? (
-              <SubmissionResults submission={submission} />
-              // <h1>Submission Data</h1>
+              <Submission submission={submission} />
             ) : (
+              // <h1>Submission Data</h1>
               <>
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-xl font-bold">Test Cases</h3>

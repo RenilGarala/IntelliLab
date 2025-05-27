@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 
 const SubmissionsList = ({ submissions, isLoading }) => {
-  // Helper function to safely parse JSON strings
+  
   const safeParse = (data) => {
     try {
       return JSON.parse(data);
@@ -18,7 +18,6 @@ const SubmissionsList = ({ submissions, isLoading }) => {
     }
   };
 
-  // Helper function to calculate average memory usage
   const calculateAverageMemory = (memoryData) => {
     const memoryArray = safeParse(memoryData).map((m) =>
       parseFloat(m.split(" ")[0])
@@ -29,7 +28,6 @@ const SubmissionsList = ({ submissions, isLoading }) => {
     );
   };
 
-  // Helper function to calculate average runtime
   const calculateAverageTime = (timeData) => {
     const timeArray = safeParse(timeData).map((t) =>
       parseFloat(t.split(" ")[0])
@@ -38,7 +36,6 @@ const SubmissionsList = ({ submissions, isLoading }) => {
     return timeArray.reduce((acc, curr) => acc + curr, 0) / timeArray.length;
   };
 
-  // Loading state
   if (isLoading) {
     return (
       <div className="flex justify-center items-center p-8">
@@ -47,7 +44,6 @@ const SubmissionsList = ({ submissions, isLoading }) => {
     );
   }
 
-  // No submissions state
   if (!submissions?.length) {
     return (
       <div className="text-center p-8">
@@ -69,7 +65,7 @@ const SubmissionsList = ({ submissions, isLoading }) => {
           >
             <div className="card-body p-4">
               <div className="flex items-center justify-between">
-                {/* Left Section: Status and Language */}
+
                 <div className="flex items-center gap-4">
                   {submission.status === "Accepted" ? (
                     <div className="flex items-center gap-2 text-success">
@@ -85,7 +81,6 @@ const SubmissionsList = ({ submissions, isLoading }) => {
                   <div className="badge badge-neutral">{submission.language}</div>
                 </div>
 
-                {/* Right Section: Runtime, Memory, and Date */}
                 <div className="flex items-center gap-4 text-base-content/70">
                   <div className="flex items-center gap-1">
                     <Clock className="w-4 h-4" />

@@ -6,7 +6,7 @@ export const useSubmissionStore = create((set, get) => ({
   isLoading: false,
   submissions: [],
   submission: null,
-  submissionCount: null,
+  submissionCount: 0,
 
   getAllSubmissions: async () => {
     try {
