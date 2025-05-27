@@ -70,6 +70,16 @@ const ProblemPage = () => {
     setCode(problem.codeSnippets?.[lang] || "");
   };
 
+  useEffect(() => {
+    if (problem?.codeSnippets) {
+      const defaultLang = problem.codeSnippets["JAVASCRIPT"]
+        ? "JAVASCRIPT"
+        : Object.keys(problem.codeSnippets)[0];
+      setSelectedLanguage(defaultLang);
+      setCode(problem.codeSnippets[defaultLang] || "");
+    }
+  }, [problem]);
+
   const renderTabContent = () => {
     switch (activeTab) {
       case "description":
