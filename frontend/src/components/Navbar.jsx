@@ -90,7 +90,7 @@ const Navbar = () => {
               <li>
                 <Link
                   to="/profile"
-                  className="hover:bg-primary hover:text-white text-base font-semibold"
+                  className="hover:bg-sky-600 hover:text-white text-base font-semibold"
                 >
                   <User className="w-4 h-4 mr-2" />
                   My Profile
@@ -100,7 +100,7 @@ const Navbar = () => {
                 <li>
                   <Link
                     to="/add-problem"
-                    className="hover:bg-primary hover:text-white text-base font-semibold"
+                    className="hover:bg-sky-600 hover:text-white text-base font-semibold"
                   >
                     <Code className="w-4 h-4 mr-1" />
                     Add Problem
@@ -109,14 +109,14 @@ const Navbar = () => {
               )}
               {authUser === false || isLoggingIn === false ? (
                 <li>
-                  <LoginButton className="hover:bg-primary hover:text-white">
+                  <LoginButton className=" hover:text-white">
                     <LogIn className="w-4 h-4 mr-2" />
                     Sign Up
                   </LoginButton>
                 </li>
               ) : (
                 <li>
-                  <LogoutButton className="hover:bg-primary hover:text-white">
+                  <LogoutButton className="hover:text-white">
                     <LogOut className="w-4 h-4 mr-2" />
                     Logout
                   </LogoutButton>

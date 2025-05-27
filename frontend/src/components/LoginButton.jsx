@@ -9,7 +9,7 @@ const LoginButton = ({ children }) => {
   };
 
   return (
-    <button className="btn btn-primary" onClick={onLogin}>
+    <button className="btn bg-sky-600 hover:bg-sky-700" onClick={onLogin}>
       {children}
     </button>
   );

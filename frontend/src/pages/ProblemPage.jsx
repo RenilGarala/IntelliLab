@@ -232,9 +232,6 @@ const ProblemPage = () => {
           >
             <Bookmark className="w-5 h-5" />
           </button>
-          <button className="btn btn-ghost btn-circle">
-            <Share2 className="w-5 h-5" />
-          </button>
           <select
             className="select select-bordered w-32  ml-3"
             value={selectedLanguage}

@@ -12,7 +12,7 @@ const LogoutButton = ({ children }) => {
   };
 
   return (
-    <button className="btn btn-primary" onClick={onLogout}>
+    <button className="btn bg-sky-600 hover:bg-sky-700" onClick={onLogout}>
       {children}
     </button>
   );
