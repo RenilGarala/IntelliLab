@@ -10,24 +10,23 @@ import {
   Loader2,
 } from "lucide-react";
 import { useActions } from "../store/useActions";
-// import AddToPlaylistModal from "./AddToPlaylist";
-// import CreatePlaylistModal from "./CreatePlaylistModal";
-// import { usePlaylistStore } from "../store/usePlaylistStore";
+import { usePlaylistStore } from "../store/usePlaylistStore";
+import AddToPlaylist from "./AddToPlaylist";
+import CreatePlaylistModal from "./CreatePlaylistModel";
 
 const ProblemsTable = ({ problems }) => {
   const { authUser } = useAuthStore();
 
   const { isDeletingProblem, onDeleteProblem } = useActions();
-  //   const { createPlaylist } = usePlaylistStore();
+  const { createPlaylist } = usePlaylistStore();
 
   const [search, setSearch] = useState("");
   const [difficulty, setDifficulty] = useState("ALL");
   const [selectedTag, setSelectedTag] = useState("ALL");
   const [currentPage, setCurrentPage] = useState(1);
-  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-  const [isAddToPlaylistModalOpen, setIsAddToPlaylistModalOpen] =
-    useState(false);
   const [selectedProblemId, setSelectedProblemId] = useState(null);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isAddToPlaylistModalOpen, setIsAddToPlaylistModalOpen] = useState(false);
 
   const allTags = useMemo(() => {
     if (!Array.isArray(problems)) return [];
@@ -243,18 +242,17 @@ const ProblemsTable = ({ problems }) => {
           Next
         </button>
       </div>
-
-      {/* <CreatePlaylistModal
+      <CreatePlaylistModal
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
         onSubmit={handleCreatePlaylist}
       />
 
-      <AddToPlaylistModal
+      <AddToPlaylist
         isOpen={isAddToPlaylistModalOpen}
         onClose={() => setIsAddToPlaylistModalOpen(false)}
         problemId={selectedProblemId}
-      /> */}
+      />
     </div>
   );
 };
