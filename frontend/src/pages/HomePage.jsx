@@ -1,12 +1,6 @@
 import React from "react";
 import { useAuthStore } from "../store/useAuthStore";
-import {
-  ArrowRight,
-  Code,
-  Hand,
-  Lightbulb,
-  Target,
-} from "lucide-react";
+import { ArrowRight, Code, Hand, Lightbulb, Target } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
@@ -30,11 +24,11 @@ const HomePage = () => {
         <div></div>
       )}
 
-      <h1 className="text-5xl font-extrabold z-10 text-center mb-5">
+      <h1 className="text-3xl sm:text-5xl font-extrabold z-10 text-center mb-5">
         Welcome to <span className="text-sky-500">IntelliLab</span>
       </h1>
 
-      <p className="mt-4 text-center max-w-3xl text-lg text-gray-500 dark:text-gray-400 leading-loose z-10">
+      <p className="mt-4 px-4 text-center text-base sm:text-lg md:text-xl text-gray-500 dark:text-gray-400 leading-relaxed z-10">
         IntelliLab provides focused coding challenges to help you sharpen your
         problem-solving abilities and improve your coding mindset.
       </p>
@@ -49,8 +43,8 @@ const HomePage = () => {
         Let's Start <ArrowRight className="h-4 w-4" />
       </button>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-14 max-w-5xl z-10">
-        <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center shadow-md hover:scale-105 transition">
+      <div className="flex flex-col md:flex-row flex-wrap justify-center mb-10 gap-6 mt-14 max-w-5xl z-10">
+        <div className="flex-1 min-w-[280px] max-w-[380px] m-3 sm:m-0 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center shadow-md hover:scale-105 transition">
           <Lightbulb className="mx-auto text-sky-500 mb-3" size={32} />
           <h3 className="text-xl font-bold text-white mb-2">
             Learn by Solving
@@ -61,7 +55,7 @@ const HomePage = () => {
           </p>
         </div>
 
-        <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center shadow-md hover:scale-105 transition">
+        <div className="flex-1 min-w-[280px] max-w-[380px] m-3 sm:m-0 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center shadow-md hover:scale-105 transition">
           <Code className="mx-auto text-sky-500 mb-3" size={32} />
           <h3 className="text-xl font-bold text-white mb-2">
             Real Coding Practice
@@ -72,7 +66,7 @@ const HomePage = () => {
           </p>
         </div>
 
-        <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center shadow-md hover:scale-105 transition">
+        <div className="flex-1 min-w-[280px] max-w-[380px] m-3 sm:m-0 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center shadow-md hover:scale-105 transition">
           <Target className="mx-auto text-sky-500 mb-3" size={32} />
           <h3 className="text-xl font-bold text-white mb-2">
             Stay Interview-Ready

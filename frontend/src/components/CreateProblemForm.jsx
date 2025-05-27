@@ -14,12 +14,14 @@ import {
   StepBack,
   SkipBack,
   ArrowLeft,
+  Home,
+  ChevronRight,
 } from "lucide-react";
 import Editor from "@monaco-editor/react";
 import { useState } from "react";
 import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 const problemSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters"),
@@ -517,7 +519,6 @@ const CreateProblemForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigate();
 
-
   const backToHome = async () => {
     navigation("/");
   };
@@ -597,6 +598,12 @@ const CreateProblemForm = () => {
   return (
     <div className="container mx-auto py-8 px-4 max-w-7xl">
       <div className="card bg-base-100 shadow-xl">
+        <div>
+          <Link to={"/"} className="flex items-center gap-2 text-sky-500">
+            <Home className="w-6 h-6" />
+            <ChevronRight className="w-4 h-4" />
+          </Link>
+        </div>
         <div className="card-body p-6 md:p-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 pb-4 border-b">
             <h2 className="card-title text-2xl md:text-3xl flex items-center gap-3">
@@ -1042,8 +1049,12 @@ const CreateProblemForm = () => {
             </div>
 
             <div className="card-actions justify-end pt-4 border-t">
-              <button type="submit" className="btn bg-black/15 btn-lg gap-2" onClick={backToHome}>
-                <ArrowLeft className="w-5 h-5"/>
+              <button
+                type="submit"
+                className="btn bg-black/15 btn-lg gap-2"
+                onClick={backToHome}
+              >
+                <ArrowLeft className="w-5 h-5" />
                 Back
               </button>
               <button type="submit" className="btn bg-sky-600 btn-lg gap-2">

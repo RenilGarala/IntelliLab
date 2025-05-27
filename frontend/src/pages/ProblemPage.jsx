@@ -16,6 +16,7 @@ import {
   Users,
   ThumbsUp,
   Home,
+  ListStart,
 } from "lucide-react";
 
 import { useProblemStore } from "../store/useProblemStore";
@@ -28,7 +29,13 @@ import SubmissionsList from "../components/SubmissionList";
 const ProblemPage = () => {
   const { id } = useParams();
   const { getProblemById, problem, isProblemLoading } = useProblemStore();
-  const { submission:submissions, isLoading: isSubmissionsLoading, getSubmissionForProblem , getSubmissionCountForProblem , submissionCount } = useSubmissionStore();
+  const {
+    submission: submissions,
+    isLoading: isSubmissionsLoading,
+    getSubmissionForProblem,
+    getSubmissionCountForProblem,
+    submissionCount,
+  } = useSubmissionStore();
 
   const [code, setCode] = useState("");
   const [activeTab, setActiveTab] = useState("description");
@@ -60,9 +67,6 @@ const ProblemPage = () => {
       getSubmissionForProblem(id);
     }
   }, [activeTab, id]);
-
-  console.log("submission", submissions);
-  
 
   const handleLanguageChange = (e) => {
     const lang = e.target.value;
@@ -142,7 +146,10 @@ const ProblemPage = () => {
         );
       case "submissions":
         return (
-          <SubmissionsList submissions={submissions} isLoading={isSubmissionsLoading} />
+          <SubmissionsList
+            submissions={submissions}
+            isLoading={isSubmissionsLoading}
+          />
         );
       case "discussion":
         return (
@@ -198,10 +205,19 @@ const ProblemPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-base-300 to-base-200">
       <nav className="navbar bg-base-100 shadow-lg px-4">
         <div className="flex-1 gap-2">
-          <Link to={"/"} className="flex items-center gap-2 text-sky-500">
-            <Home className="w-6 h-6" />
-            <ChevronRight className="w-4 h-4" />
-          </Link>
+          <div className="flex gap-1 my-5">
+            <Link to={"/"} className="flex items-center gap-2 text-sky-500">
+              <Home className="w-6 h-6" />
+              <ChevronRight className="w-4 h-4" />
+            </Link>
+            <Link
+              to={"/problems"}
+              className="flex items-center gap-2 text-sky-500"
+            >
+              <ListStart className="w-6 h-6" />
+              <ChevronRight className="w-4 h-4" />
+            </Link>
+          </div>
           <div className="mt-2">
             <h1 className="text-xl font-bold">{problem?.title}</h1>
             <div className="flex items-center gap-2 text-sm text-base-content/70 mt-5">
@@ -219,7 +235,7 @@ const ProblemPage = () => {
               <span>{submissionCount} Submissions</span>
               <span className="text-base-content/30">•</span>
               <ThumbsUp className="w-4 h-4" />
-              <span>95% Success Rate</span>
+              <span>92% Success Rate</span>
             </div>
           </div>
         </div>
