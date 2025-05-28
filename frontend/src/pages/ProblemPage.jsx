@@ -43,7 +43,7 @@ const ProblemPage = () => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [testCases, setTestCases] = useState([]);
 
-  const { executeCode, submission, isExecuting } = useExecutionStore();
+  const { submitCode, submission, isSubmiting, isExecuting, runcode } = useExecutionStore();
 
   useEffect(() => {
     getProblemById(id);
@@ -184,7 +184,19 @@ const ProblemPage = () => {
       const language_id = getLanguageId(selectedLanguage);
       const stdin = problem.testcases.map((tc) => tc.input);
       const expected_outputs = problem.testcases.map((tc) => tc.output);
-      executeCode(code, language_id, stdin, expected_outputs, id);
+      runcode(code, language_id, stdin, expected_outputs, id);
+    } catch (error) {
+      console.log("Error executing code", error);
+    }
+  };
+
+  const handleSubmitCode = (e) => {
+    e.preventDefault();
+    try {
+      const language_id = getLanguageId(selectedLanguage);
+      const stdin = problem.testcases.map((tc) => tc.input);
+      const expected_outputs = problem.testcases.map((tc) => tc.output);
+      submitCode(code, language_id, stdin, expected_outputs, id);
     } catch (error) {
       console.log("Error executing code", error);
     }
@@ -347,9 +359,15 @@ const ProblemPage = () => {
                     disabled={isExecuting}
                   >
                     {!isExecuting && <Play className="w-4 h-4" />}
-                    Run Code
+                    Submit Code
                   </button>
-                  <button className="btn bg-emerald-600 h-10 gap-2">
+                  <button
+                    className={`btn bg-emerald-600 h-10 gap-2 ${
+                      isSubmiting ? "loading" : ""
+                    }`}
+                    onClick={handleSubmitCode}
+                    disabled={isSubmiting}
+                  >
                     Submit
                   </button>
                 </div>
