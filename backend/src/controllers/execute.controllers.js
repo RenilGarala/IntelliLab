@@ -142,7 +142,7 @@ export const executeCode = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Code executed successfully",
+      message: "Code Submited successfully",
       submission: submissionWithTestCases,
     });
   } catch (error) {
