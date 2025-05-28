@@ -59,7 +59,7 @@ const AddToPlaylist = ({ isOpen, onClose, problemId }) => {
             </button>
             <button 
               type="submit" 
-              className="btn btn-primary"
+              className="btn bg-sky-600"
               disabled={!selectedPlaylist || isLoading}
             >
               {isLoading ? <Loader className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}

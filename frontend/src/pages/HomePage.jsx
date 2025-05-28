@@ -28,7 +28,7 @@ const HomePage = () => {
         Welcome to <span className="text-sky-500">IntelliLab</span>
       </h1>
 
-      <p className="mt-4 px-4 text-center text-base sm:text-lg md:text-xl text-gray-500 dark:text-gray-400 leading-relaxed z-10">
+      <p className="mt-4 px-4 max-w-4xl text-center text-base sm:text-lg md:text-xl text-gray-500 dark:text-gray-400 leading-relaxed z-10">
         IntelliLab provides focused coding challenges to help you sharpen your
         problem-solving abilities and improve your coding mindset.
       </p>

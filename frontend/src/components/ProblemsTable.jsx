@@ -223,7 +223,7 @@ const ProblemsTable = ({ problems }) => {
         </table>
       </div>
 
-      <div className="flex justify-center mt-6 gap-2">
+      <div className="flex justify-center my-6 gap-2">
         <button
           className="btn btn-sm"
           disabled={currentPage === 1}

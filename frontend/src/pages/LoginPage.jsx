@@ -113,7 +113,7 @@ const LoginPage = () => {
 
             <button
               type="submit"
-              className="btn btn-primary w-full"
+              className="btn bg-sky-600 w-full"
                 disabled={isLoggingIn}
             >
               {isLoggingIn ? (
@@ -130,7 +130,7 @@ const LoginPage = () => {
           <div className="text-center">
             <p className="text-base-content/60">
               Don't have an account?{" "}
-              <Link to="/signup" className="link link-primary">
+              <Link to="/signup" className="link text-sky-500">
                 Register
               </Link>
             </p>

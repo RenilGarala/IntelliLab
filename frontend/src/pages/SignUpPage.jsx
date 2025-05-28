@@ -139,7 +139,7 @@ const SignUpPage = () => {
 
             <button
               type="submit"
-              className="btn btn-primary w-full"
+              className="btn bg-sky-600 w-full"
               disabled={isSigninUp}
             >
               {isSigninUp ? (
@@ -156,7 +156,7 @@ const SignUpPage = () => {
           <div className="text-center">
             <p className="text-base-content/60">
               Already have an account?{" "}
-              <Link to="/login" className="link link-primary">
+              <Link to="/login" className="link text-sky-500">
                 Login
               </Link>
             </p>

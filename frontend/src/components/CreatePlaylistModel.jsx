@@ -56,7 +56,7 @@ const CreatePlaylistModal = ({ isOpen, onClose, onSubmit }) => {
             <button type="button" onClick={onClose} className="btn btn-ghost">
               Cancel
             </button>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn bg-sky-600">
               Create Playlist
             </button>
           </div>

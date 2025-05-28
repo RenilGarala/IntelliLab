@@ -215,7 +215,7 @@ const ProblemPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-base-300 to-base-200">
-      <nav className="navbar bg-base-100 shadow-lg px-4">
+      <nav className="navbar bg-base-100 w-screen shadow-lg px-20">
         <div className="flex-1 gap-2">
           <div className="flex gap-1 my-5">
             <Link to={"/"} className="flex items-center gap-2 text-sky-500">
@@ -274,7 +274,7 @@ const ProblemPage = () => {
         </div>
       </nav>
 
-      <div className="container mx-auto p-4">
+      <div className="container w-screen mx-auto p-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="card bg-base-100 shadow-xl">
             <div className="card-body p-0">
