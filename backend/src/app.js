@@ -15,11 +15,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://intelli-lab.vercel.app",
-      "https://www.intellilab.in",
-    ],
+    origin: "*",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   }),
