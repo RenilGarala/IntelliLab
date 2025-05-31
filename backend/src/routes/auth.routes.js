@@ -8,7 +8,7 @@ authRoutes.post("/register", register);
 
 authRoutes.post("/login", login);
 
-authRoutes.post("/logout", authenticate, logout);
+authRoutes.get("/logout", authenticate, logout);
 
 authRoutes.get("/check", authenticate, checkAuth);
 
