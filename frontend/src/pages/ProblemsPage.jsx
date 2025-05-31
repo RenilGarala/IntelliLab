@@ -17,8 +17,6 @@ const ProblemsPage = () => {
       </div>
     );
   }
-  console.log(problems);
-  
 
   return (
     <div className="min-h-screen">

@@ -186,7 +186,7 @@ const ProblemPage = () => {
       const expected_outputs = problem.testcases.map((tc) => tc.output);
       runcode(code, language_id, stdin, expected_outputs, id);
     } catch (error) {
-      console.log("Error executing code", error);
+      console.error("Error executing code", error);
     }
   };
 
@@ -198,7 +198,7 @@ const ProblemPage = () => {
       const expected_outputs = problem.testcases.map((tc) => tc.output);
       submitCode(code, language_id, stdin, expected_outputs, id);
     } catch (error) {
-      console.log("Error executing code", error);
+      console.error("Error executing code", error);
     }
   };
 

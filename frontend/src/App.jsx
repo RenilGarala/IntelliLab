@@ -16,8 +16,6 @@ import ProfilePage from './pages/ProfilePage'
 
 const App = () => {
   const {authUser, checkAuth, isCheckingAuth} = useAuthStore()
-
-  console.log(authUser);
   
   useEffect(()=>{
     checkAuth()
