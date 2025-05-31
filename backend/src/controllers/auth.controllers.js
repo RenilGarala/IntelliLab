@@ -46,7 +46,7 @@ export const register = async (req, res) => {
 
     res.cookie("jwt", token, {
       httpOnly: true,
-      sameSite: "none",
+      sameSite: "None",
       secure: process.env.NODE_ENV !== "development",
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
@@ -110,7 +110,7 @@ export const login = async (req, res) => {
 
     res.cookie("jwt", token, {
       httpOnly: true,
-      sameSite: "none",
+      sameSite: "None",
       secure: process.env.NODE_ENV !== "development",
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
@@ -137,7 +137,7 @@ export const logout = async (req, res) => {
   try {
     res.clearCookie("jwt", {
       httpOnly: true,
-      sameSite: "none",
+      sameSite: "None",
       secure: process.env.NODE_ENV !== "development",
     });
 
