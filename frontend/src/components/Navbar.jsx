@@ -52,7 +52,7 @@ const Navbar = () => {
                   </Link>
                 </li>
               )}
-              {authUser === false || isLoggingIn === false ? (
+              {authUser === false ? (
                 <li>
                   <LoginButton className="hover:text-white">
                     <LogIn className="w-4 h-4 mr-2" />

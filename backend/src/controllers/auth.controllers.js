@@ -2,17 +2,14 @@ import bcrypt from "bcryptjs";
 import { db } from "../libs/db.js";
 import { UserRole } from "../generated/prisma/index.js";
 import jwt from "jsonwebtoken";
-import {
-  LoginUserSchema,
-  registerUserSchema,
-} from "../validators/auth.validator.js";
+import { LoginUserSchema, registerUserSchema } from "../validators/auth.validator.js";
 
 export const register = async (req, res) => {
   const { email, password, name } = req.body;
 
   const data = registerUserSchema.safeParse(req.body);
 
-  if (!data.success) {
+  if (!data) {
     return res.status(400).json({
       message: "Validation failed",
       errors: data.error.errors[0].message,
@@ -67,7 +64,7 @@ export const register = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-
+    
     return res.status(500).json({
       error: "An error occurred while creating the user.",
     });
@@ -118,7 +115,7 @@ export const login = async (req, res) => {
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
 
-    res.status(201).json({
+    res.status(200).json({
       success: true,
       message: "User logged in successfully.",
       user: {
@@ -146,7 +143,7 @@ export const logout = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "User logged out successfully.",
+      message: "Logout successfully.",
     });
   } catch (error) {
     res.status(400).json({
@@ -157,18 +154,10 @@ export const logout = async (req, res) => {
 
 export const checkAuth = async (req, res) => {
   try {
-    //extract user from middleware and send as a response
-    const isProduction = process.env.NODE_ENV === "production";
-
-    res.clearCookie("jwt", {
-      httpOnly: true,
-      sameSite: isProduction ? "none" : "lax",
-      secure: isProduction,
-    });
-
     res.status(200).json({
       success: true,
-      message: "User logged out successfully.",
+      message: "User Authenticate Successfully",
+      user: req.user,
     });
   } catch (error) {
     res.status(400).json({
@@ -217,8 +206,8 @@ export const getUserPlaylists = async (req, res) => {
       playLists,
     });
   } catch (error) {
-    res.status(500).json({
-      error: "Failed to fetch playlists",
+    res.status(500).json({ 
+      error: "Failed to fetch playlists" 
     });
   }
 };
