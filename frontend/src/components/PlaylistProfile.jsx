@@ -123,12 +123,10 @@ const PlaylistProfile = () => {
                     </button>
                   </div>
 
-                  {/* Description */}
                   <p className="text-base-content/80 mt-1">
                     {playlist.description}
                   </p>
 
-                  {/* Expanded Problems List */}
                   {expandedPlaylist === playlist.id && (
                     <div className="mt-4 pt-4 border-t border-base-300">
                       <h4 className="text-lg font-semibold mb-3">

@@ -11,8 +11,6 @@ import {
   BookOpen,
   CheckCircle2,
   Download,
-  StepBack,
-  SkipBack,
   ArrowLeft,
   Home,
   ChevronRight,

@@ -2,17 +2,15 @@ import React from 'react';
 import { CheckCircle2, XCircle, Clock, MemoryStick as Memory } from 'lucide-react';
 
 const Submission = ({ submission }) => {
-  // Parse stringified arrays
   const memoryArr = JSON.parse(submission.memory || '[]');
   const timeArr = JSON.parse(submission.time || '[]');
 
-  // Calculate averages
   const avgMemory = memoryArr
-    .map(m => parseFloat(m)) // remove ' KB' using parseFloat
+    .map(m => parseFloat(m))
     .reduce((a, b) => a + b, 0) / memoryArr.length;
 
   const avgTime = timeArr
-    .map(t => parseFloat(t)) // remove ' s' using parseFloat
+    .map(t => parseFloat(t))
     .reduce((a, b) => a + b, 0) / timeArr.length;
 
   const passedTests = submission.testCases.filter(tc => tc.passed).length;
@@ -21,7 +19,6 @@ const Submission = ({ submission }) => {
 
   return (
     <div className="space-y-6">
-      {/* Overall Status */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="card bg-base-200 shadow-lg">
           <div className="card-body p-4">
@@ -68,7 +65,6 @@ const Submission = ({ submission }) => {
         </div>
       </div>
 
-      {/* Test Cases Results */}
       <div className="card bg-base-100 shadow-xl">
         <div className="card-body">
           <h2 className="card-title mb-4">Test Cases Results</h2>
