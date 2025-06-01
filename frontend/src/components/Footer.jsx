@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="flex items-center gap-1 md:gap-3 md:pl-2">
           <img src={footerLogo} className="h-20 w-20 " />
           <span className="text-white text-2xl md:text-2xl mr-3 md:mr-0 font-extrabold tracking-tight drop-shadow-[0_1px_2px_rgba(255,255,255,0.25)]">
-            IntelliLab<span className="text-sky-400">.in</span>
+            Intelli<span className="text-sky-400">Lab</span>
           </span>
         </div>
         <div className="text-center text-sm md:text-right mb-5 md:mb-0 md:pr-2">

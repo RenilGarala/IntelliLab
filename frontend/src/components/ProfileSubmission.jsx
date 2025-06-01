@@ -49,10 +49,10 @@ const ProfileSubmission = () => {
   });
 
   return (
-    <div className="bg-base-200 p-4 md:p-8">
+    <div className="bg-black/15 rounded-lg shadow-md p-4 md:p-8">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold text-sky-500 mb-4 md:mb-0">My Submissions</h1>
+          <h1 className="text-xl font-bold text-gray-200 mb-4 md:mb-0">My Submissions</h1>
           
           <div className="flex flex-col sm:flex-row gap-5 w-full md:w-auto">
             <div className="dropdown dropdown-end flex items-center">

@@ -1,104 +1,74 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Mail, User, Shield, Image } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 import ProfileSubmission from "../components/ProfileSubmission";
 import ProblemSolvedByUser from "../components/ProblemSolvedByUser";
-import PlaylistProfile from "../components/PlaylistProfile";
+import { useProblemStore } from "../store/useProblemStore";
 
 const ProfilePage = () => {
   const { authUser } = useAuthStore();
+  const { solvedProblems } = useProblemStore();
 
   return (
-    <div className="min-h-screen bg-base-200 flex flex-col items-center justify-center py-10 px-4 md:px-8 w-full">
-      <div className="flex flex-row justify-between items-center w-full mb-6">
-        <div className="flex items-center gap-3">
-          <Link to={"/"} className="btn btn-circle btn-ghost">
-            <ArrowLeft className="w-5 h-5" />
-          </Link>
-          <h1 className="text-3xl font-bold text-sky-500">Profile</h1>
-        </div>
+    <div className="min-h-screen bg-base-200 px-4 md:px-10 pt-5 pb-10 flex flex-col items-center w-full">
+      {/* Header */}
+      <div className="flex items-center w-full max-w-7xl pb-5">
+        <Link to="/" className="btn btn-ghost btn-circle mr-4">
+          <ArrowLeft className="w-5 h-5" />
+        </Link>
+        <h1 className="text-3xl font-bold text-gray-200">Profile</h1>
       </div>
 
-      <div className="w-full max-w-4xl mx-auto">
-        <div className="card bg-base-100 shadow-xl">
-          <div className="card-body">
-            <div className="flex flex-col md:flex-row items-center gap-6">
-              <div className="avatar placeholder">
-                <div className="bg-neutral text-neutral-content rounded-full w-24 h-24 ring ring-sky-500 ring-offset-base-100 ring-offset-2">
-                    <img
-                      src={
-                        authUser.image ||
-                        "https://avatar.iran.liara.run/public/boy"
-                      }
-                      alt={authUser.name}
-                    />
-                </div>
-              </div>
+      <div className="flex w-full max-w-7xl gap-8">
+        <aside className="w-72 bg-black/15 rounded-lg shadow-md p-6 flex flex-col items-center">
+          <div className="avatar mb-4">
+            <div className="w-24 h-24 rounded-full overflow-hidden ring ring-sky-500 ring-offset-2 ring-offset-white">
+              <img
+                src={authUser.image || "https://avatar.iran.liara.run/public/boy"}
+                alt={authUser.name}
+                className="object-cover w-full h-full"
+              />
+            </div>
+          </div>
+          <h2 className="text-xl font-semibold text-center mb-1">{authUser.name}</h2>
+          <p className="text-sm text-gray-600 mb-2 break-all">{authUser.email}</p>
+          <div className="badge bg-sky-600 px-4 py-4">{authUser.role}</div>
+        </aside>
 
-              <div className="text-center md:text-left">
-                <h2 className="text-2xl font-bold">{authUser.name}</h2>
-                <div className="badge bg-sky-600 mt-2">{authUser.role}</div>
+        <main className="flex-1 flex flex-col gap-8">
+          <section className="bg-black/15 rounded-lg shadow-md p-6">
+            <h3 className="text-xl font-semibold mb-4">Solved Problems</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+            <div className="stat bg-base-100 shadow rounded-box">
+              <div className="stat-title">Easy</div>
+              <div className="stat-value text-success">
+                {solvedProblems.filter(p => p.difficulty === 'EASY').length}
               </div>
             </div>
-
-            <div className="divider"></div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="stat bg-base-200 rounded-box">
-                <div className="stat-figure text-sky-500">
-                  <Mail className="w-8 h-8" />
-                </div>
-                <div className="stat-title">Email</div>
-                <div className="stat-value text-lg break-all">
-                  {authUser.email}
-                </div>
+            <div className="stat bg-base-100 shadow rounded-box">
+              <div className="stat-title">Medium</div>
+              <div className="stat-value text-warning">
+                {solvedProblems.filter(p => p.difficulty === 'MEDIUM').length}
               </div>
-
-              <div className="stat bg-base-200 rounded-box">
-                <div className="stat-figure text-sky-500">
-                  <User className="w-8 h-8" />
-                </div>
-                <div className="stat-title">User ID</div>
-                <div className="stat-value text-sm break-all">
-                  {authUser.id}
-                </div>
-              </div>
-
-              <div className="stat bg-base-200 rounded-box">
-                <div className="stat-figure text-sky-500">
-                  <Shield className="w-8 h-8" />
-                </div>
-                <div className="stat-title">Role</div>
-                <div className="stat-value text-lg">{authUser.role}</div>
-                <div className="stat-desc">
-                  {authUser.role === "ADMIN"
-                    ? "Full system access"
-                    : "Limited access"}
-                </div>
-              </div>
-
-              <div className="stat bg-base-200 rounded-box">
-                <div className="stat-figure text-sky-500">
-                  <Image className="w-8 h-8" />
-                </div>
-                <div className="stat-title">Profile Image</div>
-                <div className="stat-value text-lg">
-                  {authUser.image ? "Uploaded" : "Not Set"}
-                </div>
-                <div className="stat-desc">
-                  {authUser.image
-                    ? "Image available"
-                    : "Upload a profile picture"}
-                </div>
+            </div>
+            <div className="stat bg-base-100 shadow rounded-box">
+              <div className="stat-title">Hard</div>
+              <div className="stat-value text-error">
+                {solvedProblems.filter(p => p.difficulty === 'HARD').length}
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div>
-        <ProfileSubmission />
-        <ProblemSolvedByUser />
+          </section>
+
+          <section>
+            <ProfileSubmission />
+          </section>
+
+          <section>
+            <ProblemSolvedByUser />
+          </section>
+        </main>
       </div>
     </div>
   );

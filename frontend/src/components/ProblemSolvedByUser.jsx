@@ -44,9 +44,9 @@ const ProblemSolvedByUser = () => {
   };
 
   return (
-    <div className="p-4 bg-base-200 ">
+    <div className="p-4 bg-black/15 rounded-lg shadow-md ">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-2xl font-bold text-sky-500 mb-6">Problems Solved</h2>
+        <h2 className="text-xl font-bold text-gray-200 mb-6">Problems Solved</h2>
         
         {solvedProblems.length === 0 ? (
           <div className="card bg-base-100 shadow-xl">
@@ -112,30 +112,6 @@ const ProblemSolvedByUser = () => {
                 <Link to="/problems" className="btn btn-sm bg-sky-600 hover:bg-sky-700">
                   Solve more problems
                 </Link>
-              </div>
-            </div>
-          </div>
-        )}
-        
-        {/* Stats Cards */}
-        {solvedProblems.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-            <div className="stat bg-base-100 shadow rounded-box">
-              <div className="stat-title">Easy</div>
-              <div className="stat-value text-success">
-                {solvedProblems.filter(p => p.difficulty === 'EASY').length}
-              </div>
-            </div>
-            <div className="stat bg-base-100 shadow rounded-box">
-              <div className="stat-title">Medium</div>
-              <div className="stat-value text-warning">
-                {solvedProblems.filter(p => p.difficulty === 'MEDIUM').length}
-              </div>
-            </div>
-            <div className="stat bg-base-100 shadow rounded-box">
-              <div className="stat-title">Hard</div>
-              <div className="stat-value text-error">
-                {solvedProblems.filter(p => p.difficulty === 'HARD').length}
               </div>
             </div>
           </div>

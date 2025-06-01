@@ -65,7 +65,7 @@ const PlaylistProfile = () => {
     <div className="p-4 mt-5 bg-base/15 min-h-screen">
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-3xl font-bold text-sky-500">My Playlists</h2>
+          <h2 className="text-2xl font-bold text-gray-200">My Playlists</h2>
           <button
             className="btn bg-sky-600 hover:bg-sky-700 btn-sm"
             onClick={() => setIsCreateModalOpen(true)}

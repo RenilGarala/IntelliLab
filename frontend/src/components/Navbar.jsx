@@ -19,13 +19,13 @@ const Navbar = () => {
 
   return (
     <nav className="sticky top-0 z-50 w-full py-4 px-2">
-  <div className="mx-auto max-w-4xl bg-black/15 shadow-lg shadow-neutral-600/5 backdrop-blur-lg border border-gray-200/10 p-4 rounded-2xl">
+  <div className="mx-auto max-w-4xl bg-black/10 shadow-lg shadow-neutral-600/5 backdrop-blur-lg border border-gray-200/10 p-4 rounded-2xl">
     <div className="flex flex-wrap justify-between items-center gap-4">
       <div className="flex justify-between items-center w-full md:w-auto">
         <Link to="/" className="flex items-center gap-3">
           <img src={logo} className="h-10 w-10 bg-primary/20 text-primary rounded-full" />
           <span className="text-white text-xl md:text-2xl font-extrabold tracking-tight drop-shadow-[0_1px_2px_rgba(255,255,255,0.25)]">
-            IntelliLab<span className="text-sky-400">.in</span>
+            Intelli<span className="text-sky-400">Lab</span>
           </span>
         </Link>
 

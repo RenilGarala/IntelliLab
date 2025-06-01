@@ -359,7 +359,7 @@ const ProblemPage = () => {
                     disabled={isExecuting}
                   >
                     {!isExecuting && <Play className="w-4 h-4" />}
-                    Submit Code
+                    Run Code
                   </button>
                   <button
                     className={`btn bg-emerald-600 h-10 gap-2 ${
