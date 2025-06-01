@@ -13,7 +13,7 @@ const ProblemsPage = () => {
   if (isProblemsLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <Loader className="size-10 animate-spin" />
+        <Loader className="size-10 animate-spin"/>
       </div>
     );
   }

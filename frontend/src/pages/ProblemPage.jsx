@@ -17,6 +17,7 @@ import {
   ThumbsUp,
   Home,
   ListStart,
+  Loader,
 } from "lucide-react";
 
 import { useProblemStore } from "../store/useProblemStore";
@@ -204,11 +205,9 @@ const ProblemPage = () => {
 
   if (isProblemLoading || !problem) {
     return (
-      <div className="flex items-center justify-center h-screen bg-base-200">
-        <div className="card bg-base-100 p-8 shadow-xl">
-          <span className="loading loading-spinner loading-lg text-primary"></span>
+      <div className="flex flex-col items-center justify-center gap-1 h-screen">
+          <Loader className="size-7 animate-spin"/>
           <p className="mt-4 text-base-content/70">Loading problem...</p>
-        </div>
       </div>
     );
   }
@@ -339,7 +338,7 @@ const ProblemPage = () => {
                   onChange={(value) => setCode(value || "")}
                   options={{
                     minimap: { enabled: false },
-                    fontSize: 18,
+                    fontSize: 16,
                     lineNumbers: "on",
                     roundedSelection: false,
                     scrollBeyondLastLine: false,
@@ -381,7 +380,6 @@ const ProblemPage = () => {
             {submission ? (
               <Submission submission={submission} />
             ) : (
-              // <h1>Submission Data</h1>
               <>
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-xl font-bold">Test Cases</h3>

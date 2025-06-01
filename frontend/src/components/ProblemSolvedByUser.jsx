@@ -44,7 +44,7 @@ const ProblemSolvedByUser = () => {
   };
 
   return (
-    <div className="p-4 bg-black/15 rounded-lg shadow-md ">
+    <div className="p-6 bg-black/15 rounded-lg shadow-md ">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-xl font-bold text-gray-200 mb-6">Problems Solved</h2>
         

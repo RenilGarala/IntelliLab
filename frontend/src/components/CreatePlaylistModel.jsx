@@ -26,7 +26,7 @@ const CreatePlaylistModal = ({ isOpen, onClose, onSubmit }) => {
         <form onSubmit={handleSubmit(handleFormSubmit)} className="p-6 space-y-4">
           <div className="form-control">
             <label className="label">
-              <span className="label-text font-medium">Playlist Name</span>
+              <span className="label-text font-medium pb-2">Playlist Name</span>
             </label>
             <input
               type="text"
@@ -43,10 +43,10 @@ const CreatePlaylistModal = ({ isOpen, onClose, onSubmit }) => {
 
           <div className="form-control">
             <label className="label">
-              <span className="label-text font-medium">Description</span>
+              <span className="label-text font-medium pb-2">Description</span>
             </label>
             <textarea
-              className="textarea textarea-bordered h-24"
+              className="textarea textarea-bordered w-full h-24"
               placeholder="Enter playlist description"
               {...register('description')}
             />

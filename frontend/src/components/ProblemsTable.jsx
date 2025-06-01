@@ -200,6 +200,9 @@ const ProblemsTable = ({ problems }) => {
                         )}
                         <button
                           className="btn btn-sm btn-outline flex gap-2 items-center"
+                          // {
+
+                          // }
                           onClick={() => handleAddToPlaylist(problem.id)}
                         >
                           <Bookmark className="w-4 h-4" />

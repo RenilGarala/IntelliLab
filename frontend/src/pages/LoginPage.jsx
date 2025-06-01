@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { z } from "zod";
 import myImage from "../assets/Logo3.png";
-import { useAuthStore } from '../store/useAuthStore'
+import { useAuthStore } from "../store/useAuthStore";
 
 const LogInSchema = z.object({
   email: z.string().email("Enter a Valid Email").trim(),
@@ -23,7 +23,7 @@ const LogInSchema = z.object({
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const {login, isLoggingIn} = useAuthStore();
+  const { login, isLoggingIn } = useAuthStore();
 
   const {
     register,
@@ -56,7 +56,6 @@ const LoginPage = () => {
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-medium">Email</span>
@@ -113,7 +112,7 @@ const LoginPage = () => {
             <button
               type="submit"
               className="btn bg-sky-600 w-full"
-                disabled={isLoggingIn}
+              disabled={isLoggingIn}
             >
               {isLoggingIn ? (
                 <>
