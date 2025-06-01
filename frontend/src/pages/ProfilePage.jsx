@@ -61,7 +61,8 @@ const ProfilePage = () => {
           </div>
           </section>
 
-          <section>
+          <section className="bg-black/15 rounded-lg shadow-md p-6 ">
+            <h2 className="text-xl font-bold mb-4 text-left text-white">Submission Activity</h2>
             <ProfileSubmission />
           </section>
 

@@ -1,2 +1,19 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+/* Heatmap color classes */
+.color-empty-r {
+  fill: #272f38;
+}
+.color-github-1 {
+  fill: #70cf93;
+}
+.color-github-2 {
+  fill: #40c463;
+}
+.color-github-3 {
+  fill: #30a14e;
+}
+.color-github-4 {
+  fill: #216e39;
+}
