@@ -22,9 +22,9 @@ const Navbar = () => {
 
   const handleToggle = (e) => {
     if (e.target.checked) {
-      setTheme("dark");
-    } else {
       setTheme("light");
+    } else {
+      setTheme("dark");
     }
   };
 
