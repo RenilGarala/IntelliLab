@@ -5,10 +5,12 @@ import { useAuthStore } from "../store/useAuthStore";
 import ProfileSubmission from "../components/ProfileSubmission";
 import ProblemSolvedByUser from "../components/ProblemSolvedByUser";
 import { useProblemStore } from "../store/useProblemStore";
+import { useSubmissionStore } from "../store/useSubmissionStore";
 
 const ProfilePage = () => {
   const { authUser } = useAuthStore();
   const { solvedProblems } = useProblemStore();
+    const { submissions } = useSubmissionStore();
 
   return (
     <div className="min-h-screen bg-base-200 px-4 md:px-10 pt-5 pb-10 flex flex-col items-center w-full">
@@ -21,19 +23,38 @@ const ProfilePage = () => {
       </div>
 
       <div className="flex w-full max-w-7xl gap-8">
-        <aside className="w-72 bg-black/15 rounded-lg shadow-md p-6 flex flex-col items-center">
-          <div className="avatar mb-4">
-            <div className="w-24 h-24 rounded-full overflow-hidden ring ring-sky-500 ring-offset-2 ring-offset-white">
-              <img
-                src={authUser.image || "https://avatar.iran.liara.run/public/boy"}
-                alt={authUser.name}
-                className="object-cover w-full h-full"
-              />
+        <aside className="w-72 bg-black/15 rounded-lg shadow-md p-6 flex flex-col gap-10">
+          <div className="flex flex-col items-center">
+            <div className="avatar mb-4">
+              <div className="w-24 h-24 rounded-full overflow-hidden ring ring-sky-500 ring-offset-2 ring-offset-white">
+                <img
+                  src={authUser.image || "https://avatar.iran.liara.run/public/boy"}
+                  alt={authUser.name}
+                  className="object-cover w-full h-full"
+                />
+              </div>
+            </div>
+            <h2 className="text-xl font-semibold text-center mb-1">{authUser.name}</h2>
+            <p className="text-sm text-gray-600 mb-2 break-all">{authUser.email}</p>
+            <div className="badge bg-sky-600 px-4 py-4">{authUser.role}</div>
+          </div>
+          <div>
+            <div className="font-bold pb-1 mb-2 border-b border-gray-800">States</div>
+            <div className="flex flex-col gap-2">
+              <div className="text-base">
+                <span className="text-gray-500">Total Submission : </span>
+                <span className="text-gray-50">{submissions.length}</span>
+              </div>
+              <div className="text-base">
+                <span className="text-gray-500">Total Problem Solved : </span>
+                <span className="text-gray-50">{solvedProblems.length}</span>
+              </div>
+              <div className="text-base">
+                <span className="text-gray-500">Acceptance Rate : </span>
+                <span className="text-gray-50">{solvedProblems.length/submissions.length*100} %</span>
+              </div>
             </div>
           </div>
-          <h2 className="text-xl font-semibold text-center mb-1">{authUser.name}</h2>
-          <p className="text-sm text-gray-600 mb-2 break-all">{authUser.email}</p>
-          <div className="badge bg-sky-600 px-4 py-4">{authUser.role}</div>
         </aside>
 
         <main className="flex-1 flex flex-col gap-8">
