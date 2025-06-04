@@ -51,7 +51,7 @@ const ProfilePage = () => {
               </div>
               <div className="text-base">
                 <span className="text-gray-500">Acceptance Rate : </span>
-                <span className="text-gray-50">{solvedProblems.length/submissions.length*100} %</span>
+                <span className="text-gray-50">{solvedProblems.length&&submissions.length ? solvedProblems.length/submissions.length*100 : 0} %</span>
               </div>
             </div>
           </div>
