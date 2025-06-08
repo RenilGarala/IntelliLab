@@ -14,6 +14,8 @@ import PlaylistPage from "./pages/PlaylistPage";
 import ProblemPage from "./pages/ProblemPage";
 import ProfilePage from "./pages/ProfilePage";
 import "./loader.css";
+import SheetListPage from "./pages/SheetListPage";
+import SheetPage from "./pages/SheetPage";
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
 
@@ -50,7 +52,15 @@ const App = () => {
             path="/problems"
             element={authUser ? <ProblemsPage /> : <Navigate to={"/login"} />}
           />
+          <Route
+            path="/sheet"
+            element={authUser ? <ProblemsPage /> : <Navigate to={"/login"} />}
+          />
           <Route path="/playlist" element={<PlaylistPage />} />
+          <Route
+            path="/sheets"
+            element={authUser ? <SheetListPage /> : <Navigate to={"/login"} />}
+          />
         </Route>
         <Route
           path="/login"
@@ -59,6 +69,10 @@ const App = () => {
         <Route
           path="/problem/:id"
           element={authUser ? <ProblemPage /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/sheet/:id"
+          element={authUser ? <SheetPage /> : <Navigate to={"/login"} />}
         />
         <Route
           path="/signup"

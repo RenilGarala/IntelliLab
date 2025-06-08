@@ -8,6 +8,7 @@ import executionRoute from "./routes/execute.routes.js";
 import submissionRoute from "./routes/submission.routes.js";
 import playlistRoutes from "./routes/playlist.routes.js";
 import cors from "cors";
+import sheetRoutes from "./routes/sheet.routes.js";
 
 dotenv.config();
 
@@ -16,7 +17,7 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "http://localhost:3001",
+      "http://localhost:5173",
       "http://localhost:5174",
       "http://localhost:4173",
       "https://intelli-lab.vercel.app",
@@ -41,6 +42,7 @@ app.use("/api/v1/problems", problemRoutes);
 app.use("/api/v1/execute-code", executionRoute);
 app.use("/api/v1/submission", submissionRoute);
 app.use("/api/v1/playlist", playlistRoutes);
+app.use("/api/v1/sheet", sheetRoutes);
 
 app.listen(PORT, () => {
   console.log("listening port", PORT);

@@ -7,6 +7,7 @@ import {
   CodeIcon,
   BookOpen,
   LogIn,
+  List,
 } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 import { Link } from "react-router-dom";
@@ -153,6 +154,15 @@ const Navbar = () => {
               >
                 <BookOpen className="w-4 h-4" />
                 Playlist
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/sheets"
+                className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-primary/20 hover:text-white text-sm md:text-base font-semibold"
+              >
+                <List className="w-4 h-4" />
+                Sheet
               </Link>
             </li>
           </ul>

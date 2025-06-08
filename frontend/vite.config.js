@@ -8,7 +8,4 @@ export default defineConfig({
   daisyui: {
     themes: ["light", "dark"],
   },
-  server: {
-    port: 3001,
-  },
 })
