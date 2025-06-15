@@ -27,7 +27,6 @@ export const useAuthStore = create((set, get) => ({
     set({ isSigninUp: true });
     try {
       const res = await axiosInstance.post("/auth/register", data);
-      console.log(res);
       localStorage.setItem("activationToken", res.data.activationToken);
       toast.success(res.data.message);
       set({ isSigninUp: false });
