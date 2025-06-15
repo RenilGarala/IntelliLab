@@ -249,13 +249,14 @@ export const login = async (req, res) => {
       expiresIn: "7d",
     });
 
+    const isDev = process.env.NODE_ENV === "development";
+
     res.cookie("jwt", token, {
       httpOnly: true,
-      sameSite: "None",
-      secure: true,
+      sameSite: isDev ? "Lax" : "None",
+      secure: !isDev,
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
-    
     
     return res.status(200).json({
       success: true,
