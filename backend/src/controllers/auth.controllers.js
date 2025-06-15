@@ -149,7 +149,6 @@ export const register = async (req, res) => {
   }
 };
 
-// ✅ VERIFY CONTROLLER (with jwt cookie set)
 export const verify = async (req, res) => {
   try {
     const { otp, activationToken } = req.body;
@@ -183,14 +182,12 @@ export const verify = async (req, res) => {
       },
     });
 
-    // ✅ Create final auth token
     const authToken = jwt.sign(
       { id: createdUser.id },
       process.env.JWT_KEY,
       { expiresIn: "7d" }
     );
 
-    // ✅ Set cookie
     res.cookie("jwt", authToken, {
       httpOnly: true,
       sameSite: "None",
@@ -213,7 +210,6 @@ export const verify = async (req, res) => {
   }
 };
 
-// ✅ LOGIN CONTROLLER (ensures token is set in cookie)
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -240,6 +236,7 @@ export const login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
+
       return res.status(401).json({
         message: "Invalid email or password. Please try again.",
       });
@@ -249,12 +246,10 @@ export const login = async (req, res) => {
       expiresIn: "7d",
     });
 
-    const isDev = process.env.NODE_ENV === "development";
-
     res.cookie("jwt", token, {
       httpOnly: true,
-      sameSite: isDev ? "Lax" : "None",
-      secure: !isDev,
+      sameSite: "None",
+      secure: process.env.NODE_ENV !== "development",
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
     
@@ -275,7 +270,6 @@ export const login = async (req, res) => {
     });
   }
 };
-
 
 export const logout = async (req, res) => {
   try {
