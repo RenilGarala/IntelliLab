@@ -16,6 +16,7 @@ import ProfilePage from "./pages/ProfilePage";
 import "./loader.css";
 import SheetListPage from "./pages/SheetListPage";
 import SheetPage from "./pages/SheetPage";
+import VerifyPage from "./pages/VerifyPage";
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
 
@@ -77,6 +78,10 @@ const App = () => {
         <Route
           path="/signup"
           element={!authUser ? <SignUpPage /> : <Navigate to={"/"} />}
+        />
+        <Route
+          path="/verify"
+          element={!authUser ? <VerifyPage /> : <Navigate to={"/"} />}
         />
         <Route
           path="/profile"

@@ -6,6 +6,7 @@ import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { z } from "zod";
 import myImage from "../assets/Logo3.png";
 import { useAuthStore } from "../store/useAuthStore";
+import { useNavigate } from "react-router-dom";
 
 const SignUpSchema = z.object({
   email: z.string().trim().email("Enter a Valid Email"),
@@ -31,6 +32,8 @@ const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { signup, isSigninUp } = useAuthStore();
 
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -41,7 +44,7 @@ const SignUpPage = () => {
 
   const onSubmit = async (data) => {
     try {
-      await signup(data);
+      await signup(data, navigate);
       console.log("SignUp Data:", data);
     } catch (error) {
       console.error("SignUp failed:", error);

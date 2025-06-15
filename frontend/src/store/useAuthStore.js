@@ -7,6 +7,8 @@ export const useAuthStore = create((set, get) => ({
   isSigninUp: false,
   isLoggingIn: false,
   isCheckingAuth: false,
+  isVerifying: false,
+  isVerified: false,
 
   checkAuth: async () => {
     set({ isCheckingAuth: true });
@@ -21,12 +23,15 @@ export const useAuthStore = create((set, get) => ({
     }
   },
 
-  signup: async (data) => {
+  signup: async (data, navigate) => {
     set({ isSigninUp: true });
     try {
       const res = await axiosInstance.post("/auth/register", data);
-      set({ authUser: res.data.user });
+      console.log(res);
+      localStorage.setItem("activationToken", res.data.activationToken);
       toast.success(res.data.message);
+      set({ isSigninUp: false });
+      navigate("/verify");
     } catch (error) {
       set({ authUser: null });
       toast.error("Error signing up");
@@ -57,6 +62,26 @@ export const useAuthStore = create((set, get) => ({
       toast.success("Logout successful");
     } catch (error) {
       toast.error("Error logging out");
+    }
+  },
+
+  verifyOtp: async ({ otp, activationToken },navigate ) => {
+    set({ isVerifying: true });
+    try {
+      const res = await axiosInstance.post("/auth/verify", {
+        otp,
+        activationToken,
+      });
+      set({ isVerified: true });
+      toast.success(res.data.message || "User verified successfully");
+      navigate("/login");
+    } catch (error) {
+      set({ isVerified: false });
+      toast.error(
+        error?.response?.data?.message || "OTP verification failed"
+      );
+    } finally {
+      set({ isVerifying: false });
     }
   },
 }));

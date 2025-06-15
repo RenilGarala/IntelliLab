@@ -1,10 +1,12 @@
 import express from "express"
-import { checkAuth, getSubmissions, getUserPlaylists, login, logout, register } from "../controllers/auth.controllers.js";
+import { checkAuth, getSubmissions, getUserPlaylists, login, logout, register, verify } from "../controllers/auth.controllers.js";
 import { authenticate } from "../middleware/auth.middleware.js";
 
 const authRoutes = express.Router();
 
 authRoutes.post("/register", register);
+
+authRoutes.post("/verify", verify);
 
 authRoutes.post("/login", login);
 
