@@ -149,6 +149,7 @@ export const register = async (req, res) => {
   }
 };
 
+// ✅ VERIFY CONTROLLER (with jwt cookie set)
 export const verify = async (req, res) => {
   try {
     const { otp, activationToken } = req.body;
@@ -182,16 +183,37 @@ export const verify = async (req, res) => {
       },
     });
 
-    return res
-      .status(201)
-      .json({ message: "User registered successfully", user: createdUser });
+    // ✅ Create final auth token
+    const authToken = jwt.sign(
+      { id: createdUser.id },
+      process.env.JWT_KEY,
+      { expiresIn: "7d" }
+    );
+
+    // ✅ Set cookie
+    res.cookie("jwt", authToken, {
+      httpOnly: true,
+      sameSite: "None",
+      secure: process.env.NODE_ENV !== "development",
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+    });
+
+    return res.status(201).json({
+      message: "User registered successfully",
+      user: {
+        id: createdUser.id,
+        name: createdUser.name,
+        email: createdUser.email,
+      },
+    });
   } catch (error) {
     return res.status(400).json({
-      message:"Error in register user",
-    })
+      message: "Error in register user",
+    });
   }
 };
 
+// ✅ LOGIN CONTROLLER (ensures token is set in cookie)
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -205,14 +227,12 @@ export const login = async (req, res) => {
   }
 
   try {
-    const user = await db.user.findUnique({
-      where: {
-        email: email,
-      },
+    const user = await prisma.user.findUnique({
+      where: { email },
     });
 
     if (!user) {
-      res.status(400).json({
+      return res.status(400).json({
         message: "User does not exist. Please check your email and try again.",
       });
     }
@@ -220,7 +240,7 @@ export const login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      res.status(401).json({
+      return res.status(401).json({
         message: "Invalid email or password. Please try again.",
       });
     }
@@ -229,14 +249,16 @@ export const login = async (req, res) => {
       expiresIn: "7d",
     });
 
+    const isDev = process.env.NODE_ENV === "development";
+
     res.cookie("jwt", token, {
       httpOnly: true,
-      sameSite: "None",
-      secure: process.env.NODE_ENV !== "development",
+      sameSite: isDev ? "Lax" : "None",
+      secure: !isDev,
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
-
-    res.status(200).json({
+    
+    return res.status(200).json({
       success: true,
       message: "User logged in successfully.",
       user: {
@@ -253,6 +275,7 @@ export const login = async (req, res) => {
     });
   }
 };
+
 
 export const logout = async (req, res) => {
   try {

@@ -33,7 +33,7 @@ export const useAuthStore = create((set, get) => ({
       navigate("/verify");
     } catch (error) {
       set({ authUser: null });
-      toast.error("Error signing up");
+      toast.error(error?.response?.data?.message || "Error signing up");
     } finally {
       set({ isSigninUp: false });
     }
@@ -46,10 +46,11 @@ export const useAuthStore = create((set, get) => ({
       set({ authUser: res.data.user });
       toast.success(res.data.message);
     } catch (error) {
-      toast.error("Error logging in");
+      toast.error(error?.response?.data?.message || "Error logging in");
+    } finally {
       set({ isLoggingIn: false });
     }
-  },
+  },  
 
   logout: async () => {
     try {
