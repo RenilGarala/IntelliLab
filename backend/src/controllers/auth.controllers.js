@@ -106,7 +106,7 @@ export const register = async (req, res) => {
       errors: data.error.errors[0].message,
     });
   }
-  
+
   try {
     const { email, name, password } = req.body;
 
@@ -182,13 +182,11 @@ export const verify = async (req, res) => {
       },
     });
 
-    const authToken = jwt.sign(
-      { id: createdUser.id },
-      process.env.JWT_KEY,
-      { expiresIn: "7d" }
-    );
+    const token = jwt.sign({ id: newUser.id }, process.env.JWT_KEY, {
+      expiresIn: "7d",
+    });
 
-    res.cookie("jwt", authToken, {
+    res.cookie("jwt", token, {
       httpOnly: true,
       sameSite: "None",
       secure: process.env.NODE_ENV !== "development",
@@ -236,13 +234,12 @@ export const login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-
       return res.status(401).json({
         message: "Invalid email or password. Please try again.",
       });
     }
 
-    const token = jwt.sign({ id: user.id }, process.env.JWT_KEY, {
+    const token = jwt.sign({ id: newUser.id }, process.env.JWT_KEY, {
       expiresIn: "7d",
     });
 
@@ -252,7 +249,7 @@ export const login = async (req, res) => {
       secure: process.env.NODE_ENV !== "development",
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
-    
+
     return res.status(200).json({
       success: true,
       message: "User logged in successfully.",
