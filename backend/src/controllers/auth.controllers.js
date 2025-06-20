@@ -111,7 +111,7 @@ export const register = async (req, res) => {
     const { email, name, password } = req.body;
 
     const existingUser = await prisma.user.findUnique({ where: { email } });
-
+    
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
@@ -125,7 +125,7 @@ export const register = async (req, res) => {
     };
 
     const otp = Math.floor(100000 + Math.random() * 900000);
-
+    
     const activationToken = jwt.sign(
       {
         user: userPayload,
@@ -154,12 +154,13 @@ export const verify = async (req, res) => {
     const { otp, activationToken } = req.body;
 
     let decoded;
+    
     try {
       decoded = jwt.verify(activationToken, process.env.ACTIVATION_SECRET);
     } catch (error) {
       return res.status(400).json({ message: "Invalid or expired token" });
     }
-
+    
     const { user, otp: tokenOtp } = decoded;
 
     if (tokenOtp != otp) {
@@ -182,13 +183,13 @@ export const verify = async (req, res) => {
       },
     });
 
-    const token = jwt.sign({ id: newUser.id }, process.env.JWT_KEY, {
+    const token = jwt.sign({ id: createdUser.id }, process.env.JWT_KEY, {
       expiresIn: "7d",
     });
 
     res.cookie("jwt", token, {
       httpOnly: true,
-      sameSite: "None",
+      sameSite: process.env.NODE_ENV === "development" ? "Lax" : "None",
       secure: process.env.NODE_ENV !== "development",
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
@@ -239,13 +240,13 @@ export const login = async (req, res) => {
       });
     }
 
-    const token = jwt.sign({ id: newUser.id }, process.env.JWT_KEY, {
+    const token = jwt.sign({ id: user.id }, process.env.JWT_KEY, {
       expiresIn: "7d",
     });
 
     res.cookie("jwt", token, {
       httpOnly: true,
-      sameSite: "None",
+      sameSite: process.env.NODE_ENV === "development" ? "Lax" : "None",
       secure: process.env.NODE_ENV !== "development",
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
