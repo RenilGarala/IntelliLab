@@ -1,9 +1,9 @@
 import bcrypt from "bcryptjs";
 import { db } from "../libs/db.js";
-import { UserRole } from "../generated/prisma/index.js";
+// import { UserRole } from "../generated/prisma/index.js";
 import jwt from "jsonwebtoken";
 import {
-  LoginUserSchema,
+  // LoginUserSchema,
   registerUserSchema,
 } from "../validators/auth.validator.js";
 import nodemailer from "nodemailer";
@@ -110,7 +110,7 @@ export const register = async (req, res) => {
   try {
     const { email, name, password } = req.body;
 
-    const existingUser = await prisma.user.findUnique({ where: { email } });
+    const existingUser = await db.user.findUnique({ where: { email } });
 
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
@@ -168,7 +168,7 @@ export const verify = async (req, res) => {
       return res.status(400).json({ message: "Incorrect OTP" });
     }
 
-    const alreadyExists = await prisma.user.findUnique({
+    const alreadyExists = await db.user.findUnique({
       where: { email: user.email },
     });
 
@@ -176,7 +176,7 @@ export const verify = async (req, res) => {
       return res.status(400).json({ message: "User already registered" });
     }
 
-    const createdUser = await prisma.user.create({
+    const createdUser = await db.user.create({
       data: {
         name: user.name,
         email: user.email,
@@ -224,7 +224,7 @@ export const login = async (req, res) => {
     //   });
     // }
 
-    const user = await prisma.user.findUnique({
+    const user = await db.user.findUnique({
       where: { email },
     });
 
