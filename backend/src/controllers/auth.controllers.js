@@ -214,14 +214,14 @@ export const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const data = LoginUserSchema.safeParse(req.body);
+    // const data = LoginUserSchema.safeParse(req.body);
 
-    if (!data.success) {
-      return res.status(400).json({
-        message: "Validation failed",
-        errors: data.error.errors[0].message,
-      });
-    }
+    // if (!data.success) {
+    //   return res.status(400).json({
+    //     message: "Validation failed",
+    //     errors: data.error.errors[0].message,
+    //   });
+    // }
 
     const user = await prisma.user.findUnique({
       where: { email },
