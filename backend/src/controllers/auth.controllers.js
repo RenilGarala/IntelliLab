@@ -111,7 +111,7 @@ export const register = async (req, res) => {
     const { email, name, password } = req.body;
 
     const existingUser = await prisma.user.findUnique({ where: { email } });
-    
+
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
@@ -125,7 +125,7 @@ export const register = async (req, res) => {
     };
 
     const otp = Math.floor(100000 + Math.random() * 900000);
-    
+
     const activationToken = jwt.sign(
       {
         user: userPayload,
@@ -154,13 +154,13 @@ export const verify = async (req, res) => {
     const { otp, activationToken } = req.body;
 
     let decoded;
-    
+
     try {
       decoded = jwt.verify(activationToken, process.env.ACTIVATION_SECRET);
     } catch (error) {
       return res.status(400).json({ message: "Invalid or expired token" });
     }
-    
+
     const { user, otp: tokenOtp } = decoded;
 
     if (tokenOtp != otp) {
@@ -210,18 +210,19 @@ export const verify = async (req, res) => {
 };
 
 export const login = async (req, res) => {
+  console.log("Login request received");
   const { email, password } = req.body;
 
-  const data = LoginUserSchema.safeParse(req.body);
-
-  if (!data.success) {
-    return res.status(400).json({
-      message: "Validation failed",
-      errors: data.error.errors[0].message,
-    });
-  }
-
   try {
+    const data = LoginUserSchema.safeParse(req.body);
+
+    if (!data.success) {
+      return res.status(400).json({
+        message: "Validation failed",
+        errors: data.error.errors[0].message,
+      });
+    }
+
     const user = await prisma.user.findUnique({
       where: { email },
     });
