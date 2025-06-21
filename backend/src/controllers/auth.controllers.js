@@ -143,6 +143,7 @@ export const register = async (req, res) => {
       activationToken,
     });
   } catch (error) {
+    console.log(error);
     return res.status(400).json({
       message: "Error in sending mail",
     });
