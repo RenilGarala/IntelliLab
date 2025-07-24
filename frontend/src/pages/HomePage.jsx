@@ -12,7 +12,7 @@ const HomePage = () => {
   };
 
   return (
-    <section className=" min-h-screen flex flex-col items-center pt-32 ">
+    <section className="min-h-screen flex flex-col items-center pt-32">
       <div className="absolute top-16 left-0 w-1/4 h-1/4 bg-sky-500 opacity-30 blur-3xl rounded-full bottom-9"></div>
 
       {authUser ? (

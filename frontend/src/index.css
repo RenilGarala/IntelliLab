@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+:root, [data-theme] {
+  background-color: transparent !important;
+}
+
 /* Heatmap color classes */
 .color-empty-r {
   fill: #272f38;
