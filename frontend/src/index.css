@@ -5,7 +5,6 @@
   background-color: transparent !important;
 }
 
-/* Heatmap color classes */
 .color-empty-r {
   fill: #272f38;
 }
@@ -20,4 +19,45 @@
 }
 .color-github-4 {
   fill: #216e39;
+}
+
+
+@keyframes bubbleFloat {
+    0% {
+      transform: translate(600px, 0);
+    }
+    10% {
+      transform: translate(1000px, 50px);
+    }
+    20% {
+      transform: translate(900px, 200px);
+    }
+    30% {
+      transform: translate(500px, 300px);
+    }
+    40% {
+      transform: translate(200px, -300px);
+    }
+    50% {
+      transform: translate(0, 100px);
+    }
+    60% {
+      transform: translate(-200px, 250px);  
+    }
+    70% {
+      transform: translate(100px, -100px);
+    }
+    80% {
+      transform: translate(300px, 400px);
+    }
+    90% {
+      transform: translate(300px, 200px);
+    }
+    100% {
+      transform: translate(600px, 0);
+    }  
+}
+
+.bubble-animation {
+  animation: bubbleFloat 40s linear infinite;
 }

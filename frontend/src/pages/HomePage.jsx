@@ -1,84 +1,216 @@
-import React from "react";
-import { useAuthStore } from "../store/useAuthStore";
-import { ArrowRight, Code, Hand, Lightbulb, Target } from "lucide-react";
+import {
+  ArrowRight,
+  Award,
+  ChartLine,
+  Code,
+  Lightbulb,
+  Star,
+  Target,
+  User,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-const HomePage = () => {
-  const { authUser } = useAuthStore();
+const HeroSection = () => {
   const navigation = useNavigate();
-
   const navigateToProblem = () => {
     navigation("/problems");
   };
 
   return (
-    <section className="min-h-screen flex flex-col items-center pt-32">
-      <div className="absolute top-16 left-0 w-1/4 h-1/4 bg-sky-500 opacity-30 blur-3xl rounded-full bottom-9"></div>
+    <div className="min-h-screen w-full flex flex-col items-center justify-start pt-14 sm:pt-28 px-10 lg:px-36 md:px-20 sm:px-16 ">
+      <section className="w-full px-4 md:px-8 xl:px-0 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center mb-44 gap-16">
+        {/* Background Bubble */}
+        <div className="absolute -z-10 top-0 left-0 w-full h-full overflow-hidden">
+          <div className="w-[300px] h-[300px] rounded-full bg-blue-500 opacity-30 blur-3xl bubble-animation"></div>
+        </div>
 
-      {authUser ? (
-        <p className="flex items-center gap-2 px-4 py-2 -mt-10 mb-10 text-sm font-semibold bg-primary/20 rounded-2xl cursor-default">
-          {" "}
-          Hey! <Hand className="w-4 h-4" /> {authUser?.name}
+        {/* Left Section */}
+        <div className="flex-1 max-w-xl">
+          <p className="flex items-center gap-2 px-4 py-2 text-sm text-base-content bg-black/0 transition-all rounded-full mb-4 w-fit backdrop-blur border border-gray-700">
+            <ChartLine className="w-4 h-4"/> Trusted by 5M+ developers
+          </p>
+
+          <h1 className="text-4xl sm:text-6xl font-extrabold mb-4 text-base-content leading-tight">
+            Master Coding Interviews with{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-500">
+              IntelliLab
+            </span>
+          </h1>
+
+          <p className="text-base-content text-base sm:text-lg md:text-xl leading-relaxed mb-6">
+            The most effective platform to prepare for technical interviews.
+            Practice with real company questions and join our thriving developer
+            community.
+          </p>
+
+          <div className="flex gap-4 flex-wrap">
+            <button
+              type="button"
+              onClick={navigateToProblem}
+              className="px-6 py-2 bg-gradient-to-r from-sky-400 to-blue-700 text-white rounded-full font-semibold hover:scale-105 transition"
+            >
+              Start Practicing{" "}
+              <ArrowRight className="inline-block w-4 h-4 ml-1" />
+            </button>
+            <button
+              type="button"
+              className="px-6 py-2 border border-white/30 text-white rounded-full font-semibold hover:scale-105 transition"
+            >
+              Learn More
+            </button>
+          </div>
+        </div>
+
+        {/* Right Section */}
+        <div className="flex-1 w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-6">
+            {/* Card 1 */}
+            <div className="group rounded-2xl p-6 bg-gradient-to-br from-[#1b1b1b] to-[#171717] border-2 border-neutral-800 hover:border-blue-500 transition shadow duration-400 ease-in-out transform hover:-translate-y-1">
+              <div className="flex items-start gap-3">
+                <Code className="text-blue-500" />
+              </div>
+              <p className="mt-4 text-3xl font-bold text-white">1500+</p>
+              <p className="text-gray-400 text-sm">Problems</p>
+            </div>
+
+            {/* Card 2 */}
+            <div className="group rounded-2xl p-6 bg-gradient-to-br from-[#1b1b1b] to-[#171717] border-2 border-neutral-800 hover:border-blue-500 transition shadow duration-400 ease-in-out transform hover:-translate-y-1">
+              <div className="flex items-start gap-3">
+                <User className="text-blue-500" />
+              </div>
+              <p className="mt-4 text-3xl font-bold text-white">5M+</p>
+              <p className="text-gray-400 text-sm">Users</p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="group rounded-2xl p-6 bg-gradient-to-br from-[#1b1b1b] to-[#171717] border-2 border-neutral-800 hover:border-blue-500 transition shadow duration-400 ease-in-out transform hover:-translate-y-1">
+              <div className="flex items-start gap-3">
+                <Award className="text-blue-500" />
+              </div>
+              <p className="mt-4 text-3xl font-bold text-white">300+</p>
+              <p className="text-gray-400 text-sm">Contests</p>
+            </div>
+
+            {/* Card 4 */}
+            <div className="group rounded-2xl p-6 bg-gradient-to-br from-[#1b1b1b] to-[#171717] border-2 border-neutral-800 hover:border-blue-500 transition shadow duration-400 ease-in-out transform hover:-translate-y-1">
+              <div className="flex items-start gap-3">
+                <ChartLine className="text-blue-500" />
+              </div>
+              <p className="mt-4 text-3xl font-bold text-white">95%</p>
+              <p className="text-gray-400 text-sm">Satisfaction</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full mb-20">
+        <h2 className="text-center text-4xl font-bold text-base-content mb-4">
+          Why Developers Choose IntelliLab
+        </h2>
+        <p className="text-center flex flex-col items-center text-gray-400 mb-10">
+          Everything you need to ace your technical interviews in one place
+          <div className="w-20 py-1 mt-5 bg-gradient-to-r from-sky-500 to-blue-700 text-white rounded-full font-semibold hover:scale-105 transition"></div>
         </p>
-      ) : (
-        <div></div>
-      )}
 
-      <h1 className="text-3xl sm:text-5xl font-extrabold z-10 text-center mb-5">
-        Welcome to <span className="text-sky-500">IntelliLab</span>
-      </h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="bg-gradient-to-br from-[#1b1b1b] to-[#171717] border border-neutral-800 duration-300 hover:border-sky-600 hover:shadow-lg hover:shadow-sky-500/20 rounded-xl p-8 flex flex-col items-start gap-2 text-base-content shadow backdrop-blur-sm">
+            <div className=" bg-neutral-800 rounded-xl p-3 mb-3">
+              <Code className="mx-auto text-sky-500" size={24} />
+            </div>
+            <h3 className="text-xl font-bold mb-2">Interactive Coding</h3>
+            <p className="text-gray-400">
+              Write, run, and test code directly in our browser IDE with
+              real-time feedback.
+            </p>
+          </div>
 
-      <p className="mt-4 px-4 max-w-4xl text-center text-base sm:text-lg md:text-xl text-gray-500 dark:text-gray-400 leading-relaxed z-10">
-        IntelliLab provides focused coding challenges to help you sharpen your
-        problem-solving abilities and improve your coding mindset.
-      </p>
+          <div className="bg-gradient-to-br from-[#1b1b1b] to-[#171717] border border-neutral-800 duration-300 hover:border-sky-600 hover:shadow-lg hover:shadow-sky-500/20 rounded-xl p-8 flex flex-col items-start gap-2 text-base-content shadow backdrop-blur-sm">
+            <div className=" bg-neutral-800 rounded-xl p-3 mb-3">
+              <Lightbulb className="mx-auto text-sky-500" size={24} />
+            </div>
+            <h3 className="text-xl font-bold mb-2">Company Questions</h3>
+            <p className="text-gray-400">
+              Practice with actual interview questions from top tech companies
+              like FAANG.
+            </p>
+          </div>
 
-      <button
-        type="button"
-        className="mt-5 px-7 py-2 flex items-center justify-center gap-2 text-base rounded-2xl font-semibold text-white 
-             bg-gradient-to-r from-sky-500 via-sky-600 to-sky-700 
-             transform transition-transform duration-300 hover:scale-105 shadow-lg"
-        onClick={navigateToProblem}
-      >
-        Let's Start <ArrowRight className="h-4 w-4" />
-      </button>
+          <div className="bg-gradient-to-br from-[#1b1b1b] to-[#171717] border border-neutral-800 duration-300 hover:border-sky-600 hover:shadow-lg hover:shadow-sky-500/20 rounded-xl p-8 flex flex-col items-start gap-2 text-base-content shadow backdrop-blur-sm">
+            <div className=" bg-neutral-800 rounded-xl p-3 mb-3">
+              <Target className="mx-auto text-sky-500" size={24} />
+            </div>
+            <h3 className="text-xl font-bold mb-2">Detailed Solutions</h3>
+            <p className="text-gray-400">
+              Access comprehensive explanations and optimal solutions for every
+              problem.
+            </p>
+          </div>
 
-      <div className="flex flex-col md:flex-row flex-wrap justify-center mb-10 gap-6 mt-14 max-w-5xl z-10">
-        <div className="flex-1 min-w-[280px] max-w-[380px] m-3 sm:m-0 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center shadow-md hover:scale-105 transition">
-          <Lightbulb className="mx-auto text-sky-500 mb-3" size={32} />
-          <h3 className="text-xl font-bold text-white mb-2">
-            Learn by Solving
-          </h3>
-          <p className="text-gray-400">
-            Solve handpicked challenges that develop your logical thinking and
-            real-world coding ability.
-          </p>
+          <div className="bg-gradient-to-br from-[#1b1b1b] to-[#171717] border border-neutral-800 duration-300 hover:border-sky-600 hover:shadow-lg hover:shadow-sky-500/20  rounded-xl p-8 flex flex-col items-start gap-2 text-base-content shadow backdrop-blur-sm">
+            <div className=" bg-neutral-800 rounded-xl p-3 mb-3">
+              <ChartLine className="mx-auto text-sky-500" size={24} />
+            </div>
+            <h3 className="text-xl font-bold mb-2">Progress Tracking</h3>
+            <p className="text-gray-400">
+              Monitor your improvement with detailed statistics and personalized
+              reports.
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-br from-[#1b1b1b] to-[#171717] border border-neutral-800 duration-300 hover:border-sky-600 hover:shadow-lg hover:shadow-sky-500/20  rounded-xl p-8 flex flex-col items-start gap-2 text-base-content shadow backdrop-blur-sm">
+            <div className=" bg-neutral-800 rounded-xl p-3 mb-3">
+              <Code className="mx-auto text-sky-500" size={24} />
+            </div>
+            <h3 className="text-xl font-bold mb-2">Community Support</h3>
+            <p className="text-gray-400">
+              Join discussions, get help, and learn from our community of
+              developers.
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-br from-[#1b1b1b] to-[#171717] border border-neutral-800 duration-300 hover:border-sky-600 hover:shadow-lg hover:shadow-sky-500/20 rounded-xl p-8 flex flex-col items-start gap-2 text-base-content shadow backdrop-blur-sm">
+            <div className=" bg-neutral-800 rounded-xl p-3 mb-3">
+              <Lightbulb className="mx-auto text-sky-500" size={24} />
+            </div>
+            <h3 className="text-xl font-bold mb-2">Premium Content</h3>
+            <p className="text-gray-400">
+              Unlock exclusive problems, video solutions, and interview
+              strategies.
+            </p>
+          </div>
         </div>
+      </section>
 
-        <div className="flex-1 min-w-[280px] max-w-[380px] m-3 sm:m-0 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center shadow-md hover:scale-105 transition">
-          <Code className="mx-auto text-sky-500 mb-3" size={32} />
-          <h3 className="text-xl font-bold text-white mb-2">
-            Real Coding Practice
-          </h3>
-          <p className="text-gray-400">
-            Work on actual code problems in a real-time environment that mimics
-            technical interviews.
-          </p>
-        </div>
+      <section className="relative w-full my-10 rounded-2xl bg-gradient-to-r from-sky-950 via-[#17203d] to-sky-950 p-10 py-14 border border-[#354965] shadow-xl backdrop-blur-md overflow-hidden">
+        <div className="absolute inset-0 rounded-2xl bg-sky-500/10 opacity-50 blur-2xl pointer-events-none z-0"></div>
 
-        <div className="flex-1 min-w-[280px] max-w-[380px] m-3 sm:m-0 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center shadow-md hover:scale-105 transition">
-          <Target className="mx-auto text-sky-500 mb-3" size={32} />
-          <h3 className="text-xl font-bold text-white mb-2">
-            Stay Interview-Ready
-          </h3>
-          <p className="text-gray-400">
-            Consistent practice ensures you're always ready for your next coding
-            interview.
+        <div className="relative z-10 flex flex-col items-center justify-between gap-4 text-center md:text-left">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+            Ready to Launch with IntelliLab?
+          </h2>
+          <p className="text-sky-100 text-lg">
+            Join thousands of developers mastering tech skills with IntelliLab’s
+            smart learning tools.
           </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 mt-5">
+            <button
+              onClick={navigateToProblem}
+              className="px-6 py-3 bg-gradient-to-r from-sky-600 to-sky-800 text-white font-medium rounded-lg shadow duration-300 hover:scale-103 transition"
+            >
+              Get Started for Free
+            </button>
+            <button className="px-6 py-3 border border-sky-500 text-white font-medium rounded-lg hover:bg-sky-500/10 duration-300 hover:scale-103 transition flex items-center gap-2">
+              Explore Premium{" "}
+              <span className="text-yellow-400">
+                <Star className="w-4 h-4" />{" "}
+              </span>
+            </button>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 };
 
-export default HomePage;
+export default HeroSection;
