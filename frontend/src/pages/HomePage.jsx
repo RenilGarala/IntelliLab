@@ -17,8 +17,8 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-start pt-14 sm:pt-28 px-10 lg:px-36 md:px-20 sm:px-16 ">
-      <section className="w-full px-4 md:px-8 xl:px-0 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center mb-44 gap-16">
+    <div className="min-h-screen w-full flex flex-col items-center justify-start pt-14 sm:pt-28 px-8 lg:px-36 md:px-20 sm:px-16 ">
+      <section className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-center mb-44 gap-16">
         {/* Background Bubble */}
         <div className="absolute -z-10 top-0 left-0 w-full h-full overflow-hidden">
           <div className="w-[300px] h-[300px] rounded-full bg-blue-500 opacity-30 blur-3xl bubble-animation"></div>
@@ -30,7 +30,7 @@ const HeroSection = () => {
             <ChartLine className="w-4 h-4"/> Trusted by 5M+ developers
           </p>
 
-          <h1 className="text-4xl sm:text-6xl font-extrabold mb-4 text-base-content leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-base-content leading-tight">
             Master Coding Interviews with{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-500">
               IntelliLab
@@ -112,7 +112,7 @@ const HeroSection = () => {
           <div className="w-20 py-1 mt-5 bg-gradient-to-r from-sky-500 to-blue-700 text-white rounded-full font-semibold hover:scale-105 transition"></div>
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="bg-gradient-to-br from-[#1b1b1b] to-[#171717] border border-neutral-800 duration-300 hover:border-sky-600 hover:shadow-lg hover:shadow-sky-500/20 rounded-xl p-8 flex flex-col items-start gap-2 text-base-content shadow backdrop-blur-sm">
             <div className=" bg-neutral-800 rounded-xl p-3 mb-3">
               <Code className="mx-auto text-sky-500" size={24} />
@@ -181,7 +181,7 @@ const HeroSection = () => {
         </div>
       </section>
 
-      <section className="relative w-full my-10 rounded-2xl bg-gradient-to-r from-sky-950 via-[#17203d] to-sky-950 p-10 py-14 border border-[#354965] shadow-xl backdrop-blur-md overflow-hidden">
+      <section className="relative w-full p-10 py-14 m-10 rounded-2xl bg-gradient-to-r from-sky-950 via-[#17203d] to-sky-950 border border-[#354965] shadow-xl backdrop-blur-md overflow-hidden">
         <div className="absolute inset-0 rounded-2xl bg-sky-500/10 opacity-50 blur-2xl pointer-events-none z-0"></div>
 
         <div className="relative z-10 flex flex-col items-center justify-between gap-4 text-center md:text-left">
