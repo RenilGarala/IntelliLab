@@ -1,5 +1,12 @@
 {
     "rewrites": [
-      { "source": "/(.*)", "destination": "/" }
+        { "source": "/playlist", "destination": "/playlist" },
+        { "source": "/problems", "destination": "/problems" },
+        { "source": "/sheets", "destination": "/sheets" },
+        { "source": "/profile", "destination": "/profile" },
+        { "source": "/add-problem", "destination": "/add-problem" },
+        { "source": "/login", "destination": "/login" },
+        { "source": "/signup", "destination": "/signup" },
+        { "source": "/(.*)", "destination": "/" }
     ]
 }
