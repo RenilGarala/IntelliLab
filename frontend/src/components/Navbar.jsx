@@ -82,7 +82,7 @@ const Navbar = () => {
                 </label>
                 <ul
                   tabIndex={0}
-                  className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 space-y-3"
+                  className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-neutral-900 rounded-box w-52 space-y-3"
                 >
                   <li>
                     <p className="text-sm font-semibold">{authUser?.name}</p>
@@ -132,7 +132,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/"
-                className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-primary/20 hover:text-white text-sm md:text-base font-semibold"
+                className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-neutral-800 hover:text-white text-sm md:text-base font-semibold"
               >
                 <Home className="w-4 h-4" />
                 Home
@@ -141,7 +141,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/problems"
-                className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-primary/20 hover:text-white text-sm md:text-base font-semibold"
+                className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-neutral-800 hover:text-white text-sm md:text-base font-semibold"
               >
                 <CodeIcon className="w-4 h-4" />
                 Problem
@@ -150,7 +150,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/playlist"
-                className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-primary/20 hover:text-white text-sm md:text-base font-semibold"
+                className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-neutral-800 hover:text-white text-sm md:text-base font-semibold"
               >
                 <BookOpen className="w-4 h-4" />
                 Playlist
@@ -159,7 +159,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/sheets"
-                className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-primary/20 hover:text-white text-sm md:text-base font-semibold"
+                className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-neutral-800 hover:text-white text-sm md:text-base font-semibold"
               >
                 <List className="w-4 h-4" />
                 Sheet
@@ -199,16 +199,18 @@ const Navbar = () => {
               </label>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 space-y-3"
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-neutral-900 rounded-box w-52 space-y-3"
               >
-                <li>
+                {authUser && (
+                  <li>
                   <p className="text-sm font-semibold">{authUser?.name}</p>
                   <hr className="border-gray-200/10" />
                 </li>
+                )}
                 <li>
                   <Link
                     to="/profile"
-                    className="hover:bg-sky-600 hover:text-white text-sm font-semibold"
+                    className="hover:bg-neutral-800 hover:text-white text-sm font-semibold"
                   >
                     <User className="w-4 h-4 mr-2" />
                     My Profile
