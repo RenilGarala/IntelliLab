@@ -51,8 +51,9 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="h-screen grid">
-      <div className="flex flex-col justify-center items-center p-6 sm:p-12">
+   <div className="flex items-center justify-center min-h-screen">
+     <div className="grid">
+      <div className="flex flex-col justify-center border border-neutral-800 rounded-2xl bg-neutral-900 items-center p-6 sm:p-12 shadow-[0_0_15px_rgba(0,0,0,0.2)] shadow-neutral-800">
         <div className="w-full max-w-md space-y-8">
           <div className="text-center mb-8">
             <div className="flex flex-col items-center gap-2 group">
@@ -67,7 +68,7 @@ const SignUpPage = () => {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div className="form-control">
               <label className="label">
-                <span className="label-text font-medium">Name</span>
+                <span className="label-text font-medium pb-2">Name</span>
               </label>
               <div className="relative">
                 <input
@@ -88,7 +89,7 @@ const SignUpPage = () => {
 
             <div className="form-control">
               <label className="label">
-                <span className="label-text font-medium">Email</span>
+                <span className="label-text font-medium pb-2">Email</span>
               </label>
               <div className="relative">
                 <input
@@ -109,7 +110,7 @@ const SignUpPage = () => {
 
             <div className="form-control">
               <label className="label">
-                <span className="label-text font-medium">Password</span>
+                <span className="label-text font-medium pb-2">Password</span>
               </label>
               <div className="relative">
                 <input
@@ -141,7 +142,7 @@ const SignUpPage = () => {
 
             <button
               type="submit"
-              className="btn bg-sky-600 w-full"
+              className="btn bg-sky-600 w-full hover:scale-95 hover:bg-sky-700 transition-all duration-300"
               disabled={isSigninUp}
             >
               {isSigninUp ? (
@@ -166,6 +167,7 @@ const SignUpPage = () => {
         </div>
       </div>
     </div>
+   </div>
   );
 };
 

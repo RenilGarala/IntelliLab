@@ -59,7 +59,7 @@ const LoginPage = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text font-medium">Email</span>
+                  <span className="label-text font-medium pb-2">Email</span>
                 </label>
                 <div className="relative">
                   <input
@@ -80,7 +80,7 @@ const LoginPage = () => {
 
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text font-medium">Password</span>
+                  <span className="label-text font-medium pb-2">Password</span>
                 </label>
                 <div className="relative">
                   <input
@@ -112,7 +112,7 @@ const LoginPage = () => {
 
               <button
                 type="submit"
-                className="btn bg-sky-600 w-full"
+                className="btn bg-sky-600 w-full hover:scale-95 hover:bg-sky-700 transition-all duration-300"
                 disabled={isLoggingIn}
               >
                 {isLoggingIn ? (
